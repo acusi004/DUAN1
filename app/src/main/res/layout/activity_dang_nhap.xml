@@ -21,6 +21,7 @@
            android:layout_height="wrap_content"
            android:layout_marginBottom="10dp"
            app:boxStrokeWidth="2dp"
+           android:textColorHint="@color/white"
            >
 
            <com.google.android.material.textfield.TextInputEditText
@@ -37,7 +38,7 @@
            android:layout_height="wrap_content"
            app:passwordToggleEnabled="true"
            app:boxStrokeWidth="2dp"
-
+           android:textColorHint="@color/white"
            >
 
            <com.google.android.material.textfield.TextInputEditText
@@ -61,6 +62,7 @@
         android:layout_marginLeft="195dp"
         android:layout_marginTop="10dp"/>
     <Button
+        android:id="@+id/btn_login"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/bg_button"
@@ -85,6 +87,7 @@
             android:layout_marginTop="100dp"
             />
         <TextView
+            android:id="@+id/tv_dangKy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng ký"
