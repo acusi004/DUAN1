@@ -26,7 +26,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtUsername"
+                android:id="@+id/edt_signUp_Username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Tài khoản"
@@ -44,7 +44,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtPassword"
+                android:id="@+id/edt_signUp_Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Mật khẩu"
@@ -62,7 +62,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtRePassword"
+                android:id="@+id/edt_signUp_RePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nhập lại Mật khẩu"
