@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.caNhan_Fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.caNhan_Fragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text=" ca nhan" />
+        android:layout_height="200dp"
+        android:background="@drawable/bg_orange"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
 
-</FrameLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            app:shapeAppearance="@style/profile"
+            android:src="@drawable/banner"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:text="hieu"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:text="nguoi dung"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:text="hieudtph35761@fpt.edu.vn"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</LinearLayout>
