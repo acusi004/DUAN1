@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="90dp"
-    android:layout_height="94dp"
+    android:layout_height="90dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_rcv_danh_muc"
-   android:gravity="center"
+    android:gravity="center"
     android:layout_marginRight="15dp"
-   >
+    app:cardCornerRadius="18dp"
+    app:cardElevation="4dp">
     <ImageView
         android:id="@+id/iv_danhMuc"
         android:layout_width="35dp"
         android:layout_height="35dp"
-
         android:layout_gravity="center"
         />
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

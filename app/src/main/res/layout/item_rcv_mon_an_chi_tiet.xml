@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="166dp"
+    android:layout_height="140dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    >
+    app:cardCornerRadius="18dp"
+    app:cardElevation="4dp"
+    android:layout_marginBottom="7dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="5dp">
 
         <ImageView
 
@@ -24,6 +27,7 @@
 
 
             <TextView
+                android:id="@+id/tv_tenMonAn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Burger"
@@ -31,6 +35,7 @@
                 android:textStyle="bold"
                 android:padding="15dp"/>
             <TextView
+                android:id="@+id/tv_moTaMonAn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. "
@@ -45,18 +50,28 @@
                 android:layout_gravity="center">
 
                 <ImageView
-                    android:layout_width="13dp"
+                    android:id="@+id/iv_plus"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:src="@drawable/plus" />
 
                 <TextView
+                    android:id="@+id/tv_soLuongMonAn"
+                    android:layout_width="13dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="7dp"
+                    android:textSize="14dp"/>
+
+                <TextView
+                    android:id="@+id/tv_giaMonAn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:text="150.000 VND"
                     android:textStyle="bold"
-                    android:layout_marginTop="12dp"/>
+                    android:layout_marginTop="8dp"/>
 
             </LinearLayout>
 

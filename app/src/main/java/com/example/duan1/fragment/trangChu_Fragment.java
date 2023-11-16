@@ -11,26 +11,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.duan1.Adapter.danhMucAdapter;
+import com.example.duan1.Adapter.monAnAdapter;
+import com.example.duan1.DAO.monAnDAO;
 import com.example.duan1.R;
+import com.example.duan1.database.DbHelper;
 import com.example.duan1.model.danhMuc;
+import com.example.duan1.model.monAn;
 
 import java.util.ArrayList;
 
 
 public class trangChu_Fragment extends Fragment {
 
-    RecyclerView rcv_danhMuc;
+    RecyclerView rcv_danhMuc, rcv_phoBien;
 
-    ArrayList<danhMuc> list = new ArrayList<>();
+    ArrayList<danhMuc> listDm = new ArrayList<>();
+    ArrayList<monAn> listMa = new ArrayList<>();
 
-    danhMucAdapter adapter;
+    danhMucAdapter adapterDm;
+    monAnAdapter adapterMa;
+
+    monAnDAO maDAO;
+
+    DbHelper dbHelper;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trang_chu_, container, false);
         rcv_danhMuc = view.findViewById(R.id.rcv_danhMuc);
+        rcv_phoBien = view.findViewById(R.id.rcv_phoBien);
         recycleviewDanhMuc();
+        recycleviewphoBien();
         return view;
     }
 
@@ -39,14 +50,26 @@ public class trangChu_Fragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rcv_danhMuc.setLayoutManager(linearLayoutManager);
 
-        list.add(new danhMuc(R.drawable.cat_1));
-        list.add(new danhMuc(R.drawable.cat_2));
-        list.add(new danhMuc(R.drawable.cat_3));
-        list.add(new danhMuc(R.drawable.cat_4));
-        list.add(new danhMuc(R.drawable.cat_5));
+        listDm.add(new danhMuc(R.drawable.cat_1));
+        listDm.add(new danhMuc(R.drawable.cat_2));
+        listDm.add(new danhMuc(R.drawable.cat_3));
+        listDm.add(new danhMuc(R.drawable.cat_4));
+        listDm.add(new danhMuc(R.drawable.cat_5));
 
-        adapter = new danhMucAdapter(getContext(), list);
-        rcv_danhMuc.setAdapter(adapter);
+        adapterDm = new danhMucAdapter(getContext(), listDm);
+        rcv_danhMuc.setAdapter(adapterDm);
+    }
+
+    private  void recycleviewphoBien(){
+        maDAO = new monAnDAO(getContext());
+        listMa = maDAO.getALl();
+
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rcv_phoBien.setLayoutManager(linearLayoutManager);
+
+        adapterMa = new monAnAdapter(listMa,dbHelper,getContext());
+        rcv_phoBien.setAdapter(adapterMa);
 
     }
 

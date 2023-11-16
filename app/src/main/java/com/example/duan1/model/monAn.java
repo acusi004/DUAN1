@@ -9,16 +9,16 @@ public class monAn {
 
     private String moTaMonAn;
 
-    private int hinhAnhMonAn;
 
 
-    public monAn(int maMonAn, String tenMonAn, int giaMonAn, int soLuongMonAn, String moTaMonAn, int hinhAnhMonAn) {
+
+    public monAn(int maMonAn, String tenMonAn, int giaMonAn, int soLuongMonAn, String moTaMonAn) {
         this.maMonAn = maMonAn;
         this.tenMonAn = tenMonAn;
         this.giaMonAn = giaMonAn;
         this.soLuongMonAn = soLuongMonAn;
         this.moTaMonAn = moTaMonAn;
-        this.hinhAnhMonAn = hinhAnhMonAn;
+
     }
 
     public monAn(String tenMonAn, int giaMonAn) {
@@ -58,11 +58,5 @@ public class monAn {
         this.soLuongMonAn = soLuongMonAn;
     }
 
-    public int getHinhAnhMonAn() {
-        return hinhAnhMonAn;
-    }
 
-    public void setHinhAnhMonAn(int hinhAnhMonAn) {
-        this.hinhAnhMonAn = hinhAnhMonAn;
-    }
 }

@@ -27,8 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_namemanhinhchinh"
-            android:textSize="24sp"
-            />
+            android:textSize="24sp" />
 
 
     </LinearLayout>
@@ -37,13 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <com.google.android.material.search.SearchBar
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="find your food"
 
-            />
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
@@ -93,7 +87,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_danhMuc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="100dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -103,7 +97,7 @@
         android:padding="15sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_monAn"
+        android:id="@+id/rcv_phoBien"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
