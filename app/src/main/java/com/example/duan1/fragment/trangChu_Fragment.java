@@ -2,6 +2,8 @@ package com.example.duan1.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +19,7 @@ import com.example.duan1.R;
 import com.example.duan1.database.DbHelper;
 import com.example.duan1.model.danhMuc;
 import com.example.duan1.model.monAn;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -40,8 +43,10 @@ public class trangChu_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_trang_chu_, container, false);
         rcv_danhMuc = view.findViewById(R.id.rcv_danhMuc);
         rcv_phoBien = view.findViewById(R.id.rcv_phoBien);
+
         recycleviewDanhMuc();
         recycleviewphoBien();
+
         return view;
     }
 

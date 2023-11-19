@@ -29,7 +29,8 @@ public class monAnDAO {
                         cursor.getString(1),
                         cursor.getInt(2),
                         cursor.getInt(3),
-                        cursor.getString(4)));
+                        cursor.getString(4),
+                        cursor.getInt(5)));
             }while (cursor.moveToNext());
         }
         return list;
