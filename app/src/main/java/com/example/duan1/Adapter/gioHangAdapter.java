@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     DbHelper dbHelper;
     Context context;
     gioHangDAO ghDAO;
+    int numberOrder = 1;
 
     public gioHangAdapter(ArrayList<gioHang> list, DbHelper dbHelper, Context context) {
         this.list = list;
@@ -39,8 +41,20 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     @Override
     public void onBindViewHolder(@NonNull gioHangAdapter.gioHangViewHolder holder, int position) {
         holder.tv_gia.setText(String.valueOf(list.get(position).getGia()));
-        holder.tv_soLuong.setText(String.valueOf(list.get(position).getSoLuong()));
+
         holder.tv_tenMon.setText(list.get(position).getTenMon());
+
+        holder.iv_plus.setOnClickListener(v -> {
+           numberOrder = numberOrder +1;
+           holder.tv_soLuong.setText(String.valueOf(numberOrder));
+        });
+
+        holder.iv_minus.setOnClickListener(v -> {
+            if(numberOrder>1){
+                numberOrder -= 1;
+            }
+            holder.tv_soLuong.setText(String.valueOf(numberOrder));
+        });
     }
 
     @Override
@@ -52,11 +66,15 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
         TextView tv_tenMon, tv_soLuong, tv_gia;
 
+        ImageView iv_plus, iv_minus;
+
         public gioHangViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_gia = itemView.findViewById(R.id.tv_gh_gia);
             tv_soLuong = itemView.findViewById(R.id.tv_gh_soLuong);
             tv_tenMon = itemView.findViewById(R.id.tv_gh_tenMon);
+            iv_plus = itemView.findViewById(R.id.plus);
+            iv_minus = itemView.findViewById(R.id.minus);
         }
     }
 }
