@@ -1,9 +1,14 @@
 package com.example.duan1.Adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,18 +61,42 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
 
 
         holder.btn_gh_themMonAn.setOnClickListener(v -> {
-//            gioHang gh = new gioHang();
-//            gh.getGia();
-//            gh.getTenMon();
-//            gh.getSoLuong();
-//            ghDAO = new gioHangDAO(context);
-//            boolean check = ghDAO.addMon(gh);
-//            if(check){
-//                Toast.makeText(context, "them thanh cong", Toast.LENGTH_SHORT).show();
-//            }else{
-//                Toast.makeText(context, "them that bai", Toast.LENGTH_SHORT).show();
-//            }
+            Dialog dialog = new Dialog(v.getContext());
+            dialog.setContentView(R.layout.dialog_item_add_cart);
 
+
+            Window window = dialog.getWindow();
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            Button btn_them, btn_huy;
+            btn_them = dialog.findViewById(R.id.item_dialog_them);
+            btn_huy = dialog.findViewById(R.id.item_dialog_huy);
+            monAn ma = list.get(position);
+
+            btn_them.setOnClickListener(v12 -> {
+                gioHangDAO ghDAO = new gioHangDAO(context);
+                gioHang gh = new gioHang();
+                gh.setMaMonAn(ma.getMaMonAn());
+                gh.setSoLuong(1);
+                gh.setGia(ma.getGiaMonAn());
+                if(!(ghDAO.addMon(gh))){
+                    Toast.makeText(context, "them that bai", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context, "them thanh cong", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            });
+
+            btn_huy.setOnClickListener(v1 -> {
+                dialog.dismiss();
+            });
+
+
+
+            dialog.show();
        });
 
     }
@@ -80,7 +109,7 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
     public class monAnViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv_gia, tv_moTa, tv_ten;
-        Button btn_gh_themMonAn;
+        ImageView btn_gh_themMonAn;
 
         public monAnViewHolder(@NonNull View itemView) {
             super(itemView);

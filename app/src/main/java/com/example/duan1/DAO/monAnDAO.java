@@ -28,11 +28,25 @@ public class monAnDAO {
                 list.add(new monAn(cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getInt(2),
-                        cursor.getInt(3),
-                        cursor.getString(4),
-                        cursor.getInt(5)));
+                        cursor.getString(3),
+                        cursor.getInt(4)));
             }while (cursor.moveToNext());
         }
         return list;
     }
+
+    public monAn getById(int id){
+        Cursor cursor = database.query("MONAN", null, "MAMONAN =?", new String[]{String.valueOf(id)}, null, null, null );
+        if(cursor.moveToNext()){
+            return new monAn(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getInt(2),
+                    cursor.getString(3),
+                    cursor.getInt(4));
+        }else{
+            return null;
+        }
+    }
+
+
 }

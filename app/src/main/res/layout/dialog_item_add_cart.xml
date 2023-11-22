@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="30dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_dialog"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="Thông báo"
+            android:textColor="#ffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="Bạn có muốn thêm sản phẩm vào giỏ hàng không ?"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/item_dialog_them"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_button"
+                android:fontFamily="@font/open_sans_light"
+                android:text="Them"
+                android:textSize="20dp"
+                app:backgroundTint="@null"
+                android:layout_marginLeft="30dp"
+                />
+            <Button
+                android:id="@+id/item_dialog_huy"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_button"
+                android:fontFamily="@font/open_sans_light"
+                android:text="Huy"
+                android:textSize="20dp"
+                app:backgroundTint="@null"
+                android:layout_marginLeft="30dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

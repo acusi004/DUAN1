@@ -34,14 +34,25 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:padding="15dp"/>
-            <TextView
-                android:id="@+id/tv_moTaMonAn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. "
-                android:textSize="16sp"
-                android:paddingLeft="15dp"
-                />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:id="@+id/tv_moTaMonAn"
+                   android:layout_width="250dp"
+                   android:layout_height="wrap_content"
+                   android:text="là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. "
+                   android:textSize="14sp"
+                   android:paddingLeft="15dp"
+                   />
+
+               <ImageView
+                   android:id="@+id/btn_gh_addMonAn"
+                   android:layout_width="35dp"
+                   android:layout_height="35dp"
+                   android:src="@drawable/plus"/>
+           </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,25 +60,13 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center">
 
-                <Button
-                    android:id="@+id/btn_gh_addMonAn"
-                    android:layout_width="75dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/bg_button"
-                    android:fontFamily="@font/open_sans_light"
-                    android:text="ADD"
-                    android:textStyle="bold"
-                    android:textSize="13dp"
-                    app:backgroundTint="@null"
-                   android:layout_marginLeft="14dp"
-                    />
-
                 <TextView
                     android:id="@+id/tv_giaMonAn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:text="150.000 VND"
+                    android:layout_marginTop="15dp"
                     android:textStyle="bold"
                    />
 

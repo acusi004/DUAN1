@@ -21,10 +21,8 @@ public class gioHangDAO {
     public boolean addMon(gioHang gh){
         database = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("MAGIOHANG",gh.getMaGioHang());
         cv.put("MAMONAN",gh.getMaMonAn());
-        cv.put("TENMONAN", gh.getTenMon());
-        cv.put("GIA", gh.getGia());
+        cv.put("SUM", gh.getGia());
         cv.put("SOLUONG", gh.getSoLuong());
         long result = database.insert("GIOHANG", null, cv);
         if(result == -1){
@@ -35,18 +33,18 @@ public class gioHangDAO {
 
     }
 
+
     public ArrayList<gioHang> getAll(){
         ArrayList<gioHang> list = new ArrayList<>();
         database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT gh.magiohang, ma.mamonan, ma.tenmon, ma.soluong, ma.giamon FROM GIOHANG gh, MONAN ma WHERE gh.mamonan = ma.mamonan", null);
+        Cursor cursor = database.rawQuery("SELECT gh.magiohang, ma.mamonan, ma.tenmon, ma.giamon FROM GIOHANG gh, MONAN ma WHERE gh.mamonan = ma.mamonan", null);
         if(cursor.getCount()>0){
             cursor.moveToFirst();
             do{
-               list.add(new gioHang(cursor.getInt(0),
-                       cursor.getInt(1),
-                       cursor.getString(2),
-                       cursor.getInt(3),
-                       cursor.getInt(4)));
+                list.add(new gioHang(cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getInt(3)));
             }while (cursor.moveToNext());
         }
 
@@ -56,9 +54,14 @@ public class gioHangDAO {
 
 
 
+
+
+
     public boolean deleteGioHang(int id){
         database = dbHelper.getWritableDatabase();
         int row = database.delete("GIOHANG", "magiohang =?", new String[]{String.valueOf(id)});
         return row != -1;
     }
+
+
 }

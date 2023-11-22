@@ -11,9 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1.DAO.gioHangDAO;
+import com.example.duan1.DAO.monAnDAO;
 import com.example.duan1.R;
 import com.example.duan1.database.DbHelper;
 import com.example.duan1.model.gioHang;
+import com.example.duan1.model.monAn;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     DbHelper dbHelper;
     Context context;
     gioHangDAO ghDAO;
+
     int numberOrder = 1;
 
     public gioHangAdapter(ArrayList<gioHang> list, DbHelper dbHelper, Context context) {
@@ -40,10 +43,9 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
     @Override
     public void onBindViewHolder(@NonNull gioHangAdapter.gioHangViewHolder holder, int position) {
+
+
         holder.tv_gia.setText(String.valueOf(list.get(position).getGia()));
-
-        holder.tv_tenMon.setText(list.get(position).getTenMon());
-
         holder.iv_plus.setOnClickListener(v -> {
            numberOrder = numberOrder +1;
            holder.tv_soLuong.setText(String.valueOf(numberOrder));

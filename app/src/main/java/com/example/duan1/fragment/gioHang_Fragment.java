@@ -32,8 +32,8 @@ public class gioHang_Fragment extends Fragment {
     DbHelper dbHelper;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_gio_hang_, container, false);
         rcv_gioHang = view.findViewById(R.id.rcv_gioHang);
         recyclerViewGioHang();
@@ -46,11 +46,12 @@ public class gioHang_Fragment extends Fragment {
        list = ghDAO.getAll();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcv_gioHang.setLayoutManager(linearLayoutManager);
 
        ghAdapter = new gioHangAdapter(list,dbHelper, getContext());
        rcv_gioHang.setAdapter(ghAdapter);
+       ghAdapter.notifyDataSetChanged();
 
 
     }

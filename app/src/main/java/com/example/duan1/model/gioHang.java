@@ -4,30 +4,18 @@ public class gioHang {
     private int maGioHang;
     private int maMonAn;
     private int soLuong;
-    private int gia;
-    private String tenMon;
+    private double gia;
+
 
 
     public gioHang() {
     }
 
-    public gioHang(int maGioHang, int maMonAn, String tenMon,int soLuong, int gia) {
+    public gioHang(int maGioHang, int maMonAn, int soLuong, double gia) {
         this.maGioHang = maGioHang;
         this.maMonAn = maMonAn;
-        this.tenMon = tenMon;
         this.soLuong = soLuong;
         this.gia = gia;
-
-    }
-
-
-
-    public int getMaMonAn() {
-        return maMonAn;
-    }
-
-    public void setMaMonAn(int maMonAn) {
-        this.maMonAn = maMonAn;
     }
 
     public int getMaGioHang() {
@@ -38,6 +26,14 @@ public class gioHang {
         this.maGioHang = maGioHang;
     }
 
+    public int getMaMonAn() {
+        return maMonAn;
+    }
+
+    public void setMaMonAn(int maMonAn) {
+        this.maMonAn = maMonAn;
+    }
+
     public int getSoLuong() {
         return soLuong;
     }
@@ -46,19 +42,11 @@ public class gioHang {
         this.soLuong = soLuong;
     }
 
-    public int getGia() {
+    public double getGia() {
         return gia;
     }
 
-    public void setGia(int gia) {
+    public void setGia(double gia) {
         this.gia = gia;
-    }
-
-    public String getTenMon() {
-        return tenMon;
-    }
-
-    public void setTenMon(String tenMon) {
-        this.tenMon = tenMon;
     }
 }

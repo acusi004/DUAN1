@@ -24,10 +24,10 @@ public class DbHelper extends SQLiteOpenHelper {
         String loaiMon = "CREATE TABLE LOAIMON (MALOAI INTEGER PRIMARY KEY AUTOINCREMENT, TENLOAI TEXT)";
         db.execSQL(loaiMon);
 
-        String monAn = "CREATE TABLE MONAN (MAMONAN INTEGER PRIMARY KEY AUTOINCREMENT, TENMON TEXT, GIAMON TEXT, SOLUONG INTEGER, MOTA TEXT, MALOAI INTEGER  REFERENCES LOAIMON(MALOAI))";
+        String monAn = "CREATE TABLE MONAN (MAMONAN INTEGER PRIMARY KEY AUTOINCREMENT, TENMON TEXT, GIAMON TEXT,  MOTA TEXT, MALOAI INTEGER  REFERENCES LOAIMON(MALOAI))";
         db.execSQL(monAn);
 
-        String gioHang = "CREATE TABLE GIOHANG (MAGIOHANG INTEGER PRIMARY KEY AUTOINCREMENT, MAMONAN INTEGER REFERENCES MONAN(MAMONAN))";
+        String gioHang = "CREATE TABLE GIOHANG (MAGIOHANG INTEGER PRIMARY KEY AUTOINCREMENT,SOLUONG INTEGER, SUM INTEGER, MAMONAN INTEGER REFERENCES MONAN(MAMONAN))";
         db.execSQL(gioHang);
 
         String donHang = "CREATE TABLE DONHANG (MADONHANG INTEGER PRIMARY KEY AUTOINCREMENT, NGAY TEXT, TRANGTHAI INTEGER ,MAMONAN INTEGER REFERENCES MONAN(MAMONAN))";
@@ -37,8 +37,8 @@ public class DbHelper extends SQLiteOpenHelper {
         // them du lieu mau vao bang
         db.execSQL("INSERT INTO NGUOIDUNG VALUES (1, 'admin','admin', 'dotrunghieu7490@gmail.com','Admin' ),(2, 'hieu','123', 'phanquocdat7490@gmail.com','Nguoi dung' )");
         db.execSQL("INSERT INTO LOAIMON VALUES (1, 'burger'), (2, 'pizza'), (3, 'cocacola')");
-        db.execSQL("INSERT INTO MONAN VALUES(1, 'burger bo', 150000, 1, 'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 1), (2, 'pizza cheese', 250000, 2, 'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 2),(3, 'KFC', 50000, 5, 'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 3)");
-        db.execSQL("INSERT INTO GIOHANG VALUES (1, 1)");
+        db.execSQL("INSERT INTO MONAN VALUES(1, 'burger bo', 150000,  'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 1), (2, 'pizza cheese', 250000, 'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 2),(3, 'KFC', 50000, 'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 3)");
+
 
     }
 

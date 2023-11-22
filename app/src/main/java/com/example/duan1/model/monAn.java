@@ -5,7 +5,7 @@ public class monAn {
     private int maMonAn;
     private String tenMonAn;
     private int giaMonAn;
-    private int soLuongMonAn;
+
 
     private String moTaMonAn;
 
@@ -15,11 +15,12 @@ public class monAn {
 
 
 
-    public monAn(int maMonAn, String tenMonAn, int giaMonAn, int soLuongMonAn, String moTaMonAn, int maLoai) {
+
+    public monAn(int maMonAn, String tenMonAn, int giaMonAn, String moTaMonAn, int maLoai) {
         this.maMonAn = maMonAn;
         this.tenMonAn = tenMonAn;
         this.giaMonAn = giaMonAn;
-        this.soLuongMonAn = soLuongMonAn;
+
         this.moTaMonAn = moTaMonAn;
         this.maLoai = maLoai;
     }
@@ -50,13 +51,7 @@ public class monAn {
         this.giaMonAn = giaMonAn;
     }
 
-    public int getSoLuongMonAn() {
-        return soLuongMonAn;
-    }
 
-    public void setSoLuongMonAn(int soLuongMonAn) {
-        this.soLuongMonAn = soLuongMonAn;
-    }
 
     public int getMaMonAn() {
         return maMonAn;
