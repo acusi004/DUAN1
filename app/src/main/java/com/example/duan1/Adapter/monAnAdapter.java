@@ -56,7 +56,7 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
     public void onBindViewHolder(@NonNull monAnViewHolder holder, int position) {
         holder.tv_ten.setText(list.get(position).getTenMonAn());
         holder.tv_moTa.setText(list.get(position).getMoTaMonAn());
-        holder.tv_gia.setText(String.valueOf(list.get(position).getGiaMonAn()));
+        holder.tv_gia.setText(String.valueOf(list.get(position).getGiaMonAn()+ " VND"));
 
 
 
@@ -84,9 +84,8 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
                     Toast.makeText(context, "them that bai", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(context, "them thanh cong", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                 }
-
-
 
             });
 

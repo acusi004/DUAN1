@@ -3,18 +3,32 @@ package com.example.duan1.model;
 public class gioHang {
     private int maGioHang;
     private int maMonAn;
+
+
+    private String tenMonAn;
     private int soLuong;
     private double gia;
+
+
+
 
 
 
     public gioHang() {
     }
 
-    public gioHang(int maGioHang, int maMonAn, int soLuong, double gia) {
+    public gioHang(int maGioHang, int maMonAn, String tenMonAn, int soLuong, double gia) {
         this.maGioHang = maGioHang;
         this.maMonAn = maMonAn;
+        this.tenMonAn = tenMonAn;
         this.soLuong = soLuong;
+        this.gia = gia;
+    }
+
+    public gioHang(int maGioHang, int maMonAn, String tenMonAn, double gia) {
+        this.maGioHang = maGioHang;
+        this.maMonAn = maMonAn;
+        this.tenMonAn = tenMonAn;
         this.gia = gia;
     }
 
@@ -48,5 +62,13 @@ public class gioHang {
 
     public void setGia(double gia) {
         this.gia = gia;
+    }
+
+    public String getTenMonAn() {
+        return tenMonAn;
+    }
+
+    public void setTenMonAn(String tenMonAn) {
+        this.tenMonAn = tenMonAn;
     }
 }

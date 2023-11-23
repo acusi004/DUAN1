@@ -1,11 +1,18 @@
 package com.example.duan1.Adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,15 +31,33 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     ArrayList<gioHang> list = new ArrayList<>();
     DbHelper dbHelper;
     Context context;
-    gioHangDAO ghDAO;
+    private gioHangDAO ghDAO;
 
-    int numberOrder = 1;
+    private monAnDAO maDAO;
 
-    public gioHangAdapter(ArrayList<gioHang> list, DbHelper dbHelper, Context context) {
+    monAn ma;
+
+    gioHang gh;
+
+
+    private onSoLuongUpClickListener plusSoLuong;
+    private onSoLuongDownClickListener minusSoLuong;
+
+    public gioHangAdapter(ArrayList<gioHang> list, DbHelper dbHelper, Context context, gioHangDAO ghDAO) {
         this.list = list;
         this.dbHelper = dbHelper;
         this.context = context;
+        this.ghDAO = ghDAO;
     }
+
+    public void setOnSoLuongDownClickListener(onSoLuongDownClickListener minusSoLuong) {
+        this.minusSoLuong = minusSoLuong;
+    }
+    public void setOnSoLuongUpClickListener(onSoLuongUpClickListener listener){
+        this.plusSoLuong = listener;
+    }
+
+
 
     @NonNull
     @Override
@@ -43,19 +68,76 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
     @Override
     public void onBindViewHolder(@NonNull gioHangAdapter.gioHangViewHolder holder, int position) {
+        gioHang gh = list.get(position);
 
-
+        holder.tv_tenMon.setText(list.get(position).getTenMonAn());
         holder.tv_gia.setText(String.valueOf(list.get(position).getGia()));
+
+
+
         holder.iv_plus.setOnClickListener(v -> {
-           numberOrder = numberOrder +1;
+           int numberOrder = gh.getSoLuong()+1;
            holder.tv_soLuong.setText(String.valueOf(numberOrder));
+           gh.setSoLuong(numberOrder);
+           ghDAO.update(gh);
+
+           if(plusSoLuong != null) {
+               plusSoLuong.plusSoLuongClick(holder.getAdapterPosition());
+           }
         });
 
         holder.iv_minus.setOnClickListener(v -> {
+
+            int numberOrder = gh.getSoLuong();
+
             if(numberOrder>1){
                 numberOrder -= 1;
+                holder.tv_soLuong.setText(String.valueOf(numberOrder));
+
+                if(minusSoLuong != null){
+                    minusSoLuong.minusSoLuongClick(holder.getAdapterPosition());
+                }
+            }else{
+                Toast.makeText(context, "Số lượng không thể nhỏ hơn 1", Toast.LENGTH_SHORT).show();
             }
-            holder.tv_soLuong.setText(String.valueOf(numberOrder));
+
+
+        });
+
+        holder.itemView.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(v.getContext());
+            dialog.setContentView(R.layout.dialog_item_delete_gio_hang);
+
+
+            Window window = dialog.getWindow();
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            Button btn_co, btn_khong;
+
+            btn_co = dialog.findViewById(R.id.item_dialog_delete_co);
+            btn_khong = dialog.findViewById(R.id.item_dialog_delete_khong);
+
+            btn_co.setOnClickListener(v1 -> {
+                ghDAO = new gioHangDAO(context);
+                int maGioHang = list.get(holder.getAdapterPosition()).getMaGioHang();
+                boolean check = ghDAO.deleteGioHang(maGioHang);
+                if(check){
+                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    list.clear();
+                    list = ghDAO.getAll();
+                    notifyItemRemoved(holder.getAdapterPosition());
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            btn_khong.setOnClickListener(v12 -> {
+                dialog.dismiss();
+            });
+
+            dialog.show();
         });
     }
 
@@ -79,4 +161,15 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
             iv_minus = itemView.findViewById(R.id.minus);
         }
     }
+
+
+    public interface onSoLuongUpClickListener{
+        void plusSoLuongClick(int position);
+    }
+
+    public interface onSoLuongDownClickListener{
+        void minusSoLuongClick(int position);
+    }
+
+
 }

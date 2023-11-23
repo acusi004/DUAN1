@@ -36,7 +36,7 @@ public class monAnDAO {
     }
 
     public monAn getById(int id){
-        Cursor cursor = database.query("MONAN", null, "MAMONAN =?", new String[]{String.valueOf(id)}, null, null, null );
+        Cursor cursor = database.query("MONAN", null, "mamonan =?", new String[]{String.valueOf(id)}, null, null, null );
         if(cursor.moveToNext()){
             return new monAn(cursor.getInt(0),
                     cursor.getString(1),

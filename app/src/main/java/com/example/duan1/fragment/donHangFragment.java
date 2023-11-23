@@ -3,6 +3,7 @@ package com.example.duan1.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.example.duan1.R;
 
 public class donHangFragment extends Fragment {
 
+
+    RecyclerView rcv_donHang;
 
 
     @Override

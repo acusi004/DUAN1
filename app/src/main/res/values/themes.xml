@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.DUAN1" parent="Base.Theme.DUAN1" />
+
+    <style name="dialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out_bottom</item>
+    </style>
 </resources>

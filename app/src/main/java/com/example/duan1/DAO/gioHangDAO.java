@@ -43,7 +43,7 @@ public class gioHangDAO {
             do{
                 list.add(new gioHang(cursor.getInt(0),
                         cursor.getInt(1),
-                        cursor.getInt(2),
+                        cursor.getString(2),
                         cursor.getInt(3)));
             }while (cursor.moveToNext());
         }
@@ -52,15 +52,24 @@ public class gioHangDAO {
 
     }
 
-
-
-
-
-
     public boolean deleteGioHang(int id){
         database = dbHelper.getWritableDatabase();
         int row = database.delete("GIOHANG", "magiohang =?", new String[]{String.valueOf(id)});
         return row != -1;
+    }
+
+    public boolean update(gioHang gh){
+        database = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("MAMONAN", gh.getMaMonAn());
+        cv.put("SOLUONG", gh.getSoLuong());
+        cv.put("SUM", gh.getGia());
+        long result = database.update("GIOHANG", cv, "magiohang = ?", new String[]{String.valueOf(gh.getMaGioHang())});
+        if(result == -1){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 

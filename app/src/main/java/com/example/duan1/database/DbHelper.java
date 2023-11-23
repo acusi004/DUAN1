@@ -30,14 +30,19 @@ public class DbHelper extends SQLiteOpenHelper {
         String gioHang = "CREATE TABLE GIOHANG (MAGIOHANG INTEGER PRIMARY KEY AUTOINCREMENT,SOLUONG INTEGER, SUM INTEGER, MAMONAN INTEGER REFERENCES MONAN(MAMONAN))";
         db.execSQL(gioHang);
 
-        String donHang = "CREATE TABLE DONHANG (MADONHANG INTEGER PRIMARY KEY AUTOINCREMENT, NGAY TEXT, TRANGTHAI INTEGER ,MAMONAN INTEGER REFERENCES MONAN(MAMONAN))";
+        String donHang = "CREATE TABLE DONHANG (MADONHANG INTEGER PRIMARY KEY AUTOINCREMENT, TRANGTHAI INTEGER ,SDT TEXT, DIACHI TEXT, THOIGIAN TEXT,MAGIOHANG INTEGER REFERENCES GIOHANG(MAGIOHANG))";
         db.execSQL(donHang);
 
 
         // them du lieu mau vao bang
         db.execSQL("INSERT INTO NGUOIDUNG VALUES (1, 'admin','admin', 'dotrunghieu7490@gmail.com','Admin' ),(2, 'hieu','123', 'phanquocdat7490@gmail.com','Nguoi dung' )");
         db.execSQL("INSERT INTO LOAIMON VALUES (1, 'burger'), (2, 'pizza'), (3, 'cocacola')");
-        db.execSQL("INSERT INTO MONAN VALUES(1, 'burger bo', 150000,  'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 1), (2, 'pizza cheese', 250000, 'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 2),(3, 'KFC', 50000, 'là một chuỗi nhà hàng thức ăn nhanh hamburger toàn cầu của Mỹ. ', 3)");
+        db.execSQL("INSERT INTO MONAN VALUES" +
+                "(1, 'Burger Classic', 150000,  'Một chiếc burger thơm ngon với bánh mì mềm mại, ', 1)," +
+                "(2, ' Pizza Pepperoni', 250000, 'Chiếc pizza nổi tiếng với lớp phô mai béo ngậy, ', 2)," +
+                "(3, ' Bánh Mì Gà Cajun', 350000, 'Gà nướng với gia vị Cajun đặc trưng, ăn kèm với bánh mì giòn tan', 3)," +
+                "(4, ' Salad Cesar Hải Sản', 550000, 'Một sự kết hợp hoàn hảo giữa rau xanh tươi ngon, tôm, mực và nước sốt ', 4)," +
+                "(5, 'Gà Rán Hấp Dẫn', 50000, ' Miếng gà tươi ngon, da giòn giòn cùng với lớp vỏ nước mắm', 5)");
 
 
     }
