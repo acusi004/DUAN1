@@ -61,7 +61,6 @@ public class gioHangDAO {
     public boolean update(gioHang gh){
         database = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("MAMONAN", gh.getMaMonAn());
         cv.put("SOLUONG", gh.getSoLuong());
         cv.put("SUM", gh.getGia());
         long result = database.update("GIOHANG", cv, "magiohang = ?", new String[]{String.valueOf(gh.getMaGioHang())});

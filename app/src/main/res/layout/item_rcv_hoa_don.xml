@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="230dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="14dp"
     app:cardElevation="4dp">
 
     <LinearLayout
@@ -41,6 +41,16 @@
                   android:fontFamily="@font/open_sans_light"
                   android:textSize="16sp"
                   android:textStyle="bold"/>
+
+              <TextView
+                  android:id="@+id/tv_hd_trangThai"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="ĐANG GIAO HÀNG"
+                  android:textColor="#0B71ED"
+                  android:textSize="16sp"
+                  android:textStyle="bold"
+                  android:gravity="end"/>
 
 
           </LinearLayout>

@@ -35,6 +35,8 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
     private monAnDAO maDAO;
 
+    gioHangAdapter ghAdapter;
+
     monAn ma;
 
     gioHang gh;
@@ -70,9 +72,9 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     public void onBindViewHolder(@NonNull gioHangAdapter.gioHangViewHolder holder, int position) {
         gioHang gh = list.get(position);
 
+
         holder.tv_tenMon.setText(list.get(position).getTenMonAn());
         holder.tv_gia.setText(String.valueOf(list.get(position).getGia()));
-
 
 
         holder.iv_plus.setOnClickListener(v -> {
@@ -80,6 +82,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
            holder.tv_soLuong.setText(String.valueOf(numberOrder));
            gh.setSoLuong(numberOrder);
            ghDAO.update(gh);
+           updateListGioHang();
 
            if(plusSoLuong != null) {
                plusSoLuong.plusSoLuongClick(holder.getAdapterPosition());
@@ -93,7 +96,9 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
             if(numberOrder>1){
                 numberOrder -= 1;
                 holder.tv_soLuong.setText(String.valueOf(numberOrder));
-
+                gh.setSoLuong(numberOrder);
+                ghDAO.update(gh);
+                updateListGioHang();
                 if(minusSoLuong != null){
                     minusSoLuong.minusSoLuongClick(holder.getAdapterPosition());
                 }
@@ -169,6 +174,13 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
     public interface onSoLuongDownClickListener{
         void minusSoLuongClick(int position);
+    }
+
+    public void updateListGioHang(){
+        list.clear();
+        list.addAll(ghDAO.getAll());
+        ghAdapter = new gioHangAdapter(list, dbHelper, context, ghDAO);
+        ghAdapter.notifyDataSetChanged();
     }
 
 
