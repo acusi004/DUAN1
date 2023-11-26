@@ -59,6 +59,56 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
         holder.tv_gia.setText(String.valueOf(list.get(position).getGiaMonAn()+ " VND"));
 
 
+        // chuc nang sua mon an admin
+        holder.itemView.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(v.getContext());
+            dialog.setContentView(R.layout.item_dialog);
+
+            Window window = dialog.getWindow();
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            dialog.show();
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.dialog_item_delete_gio_hang);
+
+
+                Window window = dialog.getWindow();
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                Button btn_co, btn_khong;
+                btn_khong = dialog.findViewById(R.id.item_dialog_delete_khong);
+                btn_co = dialog.findViewById(R.id.item_dialog_delete_co);
+
+                btn_co.setOnClickListener(v13 -> {
+                    maDAO = new monAnDAO(v.getContext());
+                    int maMonAn = list.get(holder.getAdapterPosition()).getMaMonAn();
+                    boolean check = maDAO.delete(maMonAn);
+                    if(check){
+                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                        list.clear();
+                        list = maDAO.getALl();
+                        notifyItemRemoved(holder.getAdapterPosition());
+                        dialog.dismiss();
+                    }else{
+                        Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                btn_khong.setOnClickListener(v14 -> {
+                    dialog.dismiss();
+                });
+
+
+                dialog.show();
+                return true;
+            }
+        });
 
         holder.btn_gh_themMonAn.setOnClickListener(v -> {
             Dialog dialog = new Dialog(v.getContext());

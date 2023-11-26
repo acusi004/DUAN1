@@ -6,26 +6,34 @@ public class monAn {
     private String tenMonAn;
     private int giaMonAn;
 
-
     private String moTaMonAn;
 
     private int maLoai;
 
+    private String tenLoai;
 
 
 
 
 
-    public monAn(int maMonAn, String tenMonAn, int giaMonAn, String moTaMonAn, int maLoai) {
+
+    public monAn(int maMonAn, String tenMonAn, int giaMonAn, String moTaMonAn) {
         this.maMonAn = maMonAn;
         this.tenMonAn = tenMonAn;
         this.giaMonAn = giaMonAn;
+        this.moTaMonAn = moTaMonAn;
 
+    }
+
+    public monAn(String tenMonAn, int giaMonAn, String moTaMonAn, int maLoai) {
+        this.tenMonAn = tenMonAn;
+        this.giaMonAn = giaMonAn;
         this.moTaMonAn = moTaMonAn;
         this.maLoai = maLoai;
     }
 
-
+    public monAn() {
+    }
 
     public String getTenMonAn() {
         return tenMonAn;
@@ -67,5 +75,13 @@ public class monAn {
 
     public void setMaLoai(int maLoai) {
         this.maLoai = maLoai;
+    }
+
+    public String getTenLoai() {
+        return tenLoai;
+    }
+
+    public void setTenLoai(String tenLoai) {
+        this.tenLoai = tenLoai;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.duan1.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,8 +29,7 @@ public class monAnDAO {
                 list.add(new monAn(cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getInt(2),
-                        cursor.getString(3),
-                        cursor.getInt(4)));
+                        cursor.getString(3)));
             }while (cursor.moveToNext());
         }
         return list;
@@ -41,11 +41,31 @@ public class monAnDAO {
             return new monAn(cursor.getInt(0),
                     cursor.getString(1),
                     cursor.getInt(2),
-                    cursor.getString(3),
-                    cursor.getInt(4));
+                    cursor.getString(3));
         }else{
             return null;
         }
+    }
+
+    public boolean add(monAn ma){
+        database = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("MAMONAN", ma.getMaMonAn());
+        cv.put("TENMON",ma.getTenMonAn());
+        cv.put("GIAMON",ma.getGiaMonAn());
+        cv.put("MOTA", ma.getMoTaMonAn());
+        long check = database.insert("MONAN", null, cv);
+        if(check ==-1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public boolean delete(int id){
+        database = dbHelper.getWritableDatabase();
+        int row = database.delete("MONAN", "mamonan =?", new String[]{String.valueOf(id)});
+        return row != -1;
     }
 
 

@@ -31,7 +31,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="center"
             android:padding="13dp"
-            android:text="Bạn có muốn xóa sản phẩm này không ?"
+            android:text="Bạn có muốn xóa món ăn này không ?"
             android:textColor="#000000"
             android:textSize="20dp"
             />

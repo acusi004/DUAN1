@@ -21,10 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String nguoiDung = "CREATE TABLE NGUOIDUNG (MANGUOIDUNG INTEGER PRIMARY KEY AUTOINCREMENT, TEN TEXT,PASSWORD TEXT, EMAIL TEXT, CHUCVU TEXT)";
         db.execSQL(nguoiDung);
 
-        String loaiMon = "CREATE TABLE LOAIMON (MALOAI INTEGER PRIMARY KEY AUTOINCREMENT, TENLOAI TEXT)";
-        db.execSQL(loaiMon);
-
-        String monAn = "CREATE TABLE MONAN (MAMONAN INTEGER PRIMARY KEY AUTOINCREMENT, TENMON TEXT, GIAMON TEXT,  MOTA TEXT, MALOAI INTEGER  REFERENCES LOAIMON(MALOAI))";
+        String monAn = "CREATE TABLE MONAN (MAMONAN INTEGER PRIMARY KEY AUTOINCREMENT, TENMON TEXT, GIAMON TEXT,  MOTA TEXT)";
         db.execSQL(monAn);
 
         String gioHang = "CREATE TABLE GIOHANG (MAGIOHANG INTEGER PRIMARY KEY AUTOINCREMENT,SOLUONG INTEGER, SUM INTEGER, MAMONAN INTEGER REFERENCES MONAN(MAMONAN))";
@@ -33,16 +30,19 @@ public class DbHelper extends SQLiteOpenHelper {
         String donHang = "CREATE TABLE DONHANG (MADONHANG INTEGER PRIMARY KEY AUTOINCREMENT, TRANGTHAI INTEGER ,SDT TEXT, DIACHI TEXT, THOIGIAN TEXT,MAGIOHANG INTEGER REFERENCES GIOHANG(MAGIOHANG), MAMONAN INTEGER REFERENCES MONAN(MAMONAN))";
         db.execSQL(donHang);
 
+        String lichSu = "CREATE TABLE LICHSU (MALICHSU INTEGER PRIMARY KEY AUTOINCREMENT, MAMONAN INTEGER REFERENCES MONAN(MAMONAN), MAGIOHANG INTEGER REFERENCES GIOHANG(MAGIOHANG), MADONHANG INTEGER REFERENCES DONHANG(MADONHANG))";
+        db.execSQL(lichSu);
+
 
         // them du lieu mau vao bang
         db.execSQL("INSERT INTO NGUOIDUNG VALUES (1, 'admin','admin', 'dotrunghieu7490@gmail.com','Admin' ),(2, 'hieu','123', 'phanquocdat7490@gmail.com','Nguoi dung' )");
-        db.execSQL("INSERT INTO LOAIMON VALUES (1, 'burger'), (2, 'pizza'), (3, 'cocacola')");
         db.execSQL("INSERT INTO MONAN VALUES" +
-                "(1, 'Burger Classic', 150000,  'Một chiếc burger thơm ngon với bánh mì mềm mại, ', 1)," +
-                "(2, ' Pizza Pepperoni', 250000, 'Chiếc pizza nổi tiếng với lớp phô mai béo ngậy, ', 2)," +
-                "(3, ' Bánh Mì Gà Cajun', 350000, 'Gà nướng với gia vị Cajun đặc trưng, ăn kèm với bánh mì giòn tan', 3)," +
-                "(4, ' Salad Cesar Hải Sản', 550000, 'Một sự kết hợp hoàn hảo giữa rau xanh tươi ngon, tôm, mực và nước sốt ', 4)," +
-                "(5, 'Gà Rán Hấp Dẫn', 50000, ' Miếng gà tươi ngon, da giòn giòn cùng với lớp vỏ nước mắm', 5)");
+                "(1, 'Burger Classic', 150000,  'Một chiếc burger thơm ngon với bánh mì mềm mại, ')," +
+                "(2, ' Pizza Pepperoni', 250000, 'Chiếc pizza nổi tiếng với lớp phô mai béo ngậy, ')," +
+                "(3, ' Bánh Mì Gà Cajun', 350000, 'Gà nướng với gia vị Cajun đặc trưng, ăn kèm với bánh mì giòn tan')," +
+                "(4, ' Salad Cesar Hải Sản', 550000, 'Một sự kết hợp hoàn hảo giữa rau xanh tươi ngon, tôm, mực và nước sốt ')," +
+                "(5, 'Gà Rán Hấp Dẫn', 50000, ' Miếng gà tươi ngon, da giòn giòn cùng với lớp vỏ nước mắm')");
+
 
 
     }

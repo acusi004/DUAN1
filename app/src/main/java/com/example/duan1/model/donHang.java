@@ -13,6 +13,7 @@ public class donHang {
     private int soLuong;
     private int gia;
 
+
     public donHang(int maDonHang, int trangThai, int sdt, String diaChi, String thoiGian, int maGioHang, int maMonAn) {
         this.maDonHang = maDonHang;
         this.trangThai = trangThai;
