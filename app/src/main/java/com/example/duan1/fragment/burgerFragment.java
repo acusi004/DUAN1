@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan1.Adapter.monAnAdapter;
@@ -41,21 +42,18 @@ public class burgerFragment extends Fragment {
 
     monAnAdapter adapterMa;
 
-
+    burGerDAO bgDAO;
     monAnDAO maDAO;
-
-
 
     DbHelper dbHelper;
 
     FloatingActionButton btn_addMonAn;
 
-    burGerDAO bgDAO;
+    TextView tv_all;
+
+
 
     monAn ma;
-
-
-    Spinner spn_tenLoai;
 
     int maLoai, positionMa;
     String tenLoai;
@@ -65,13 +63,18 @@ public class burgerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_burger, container, false);
         rcv_phoBien = view.findViewById(R.id.rcv_phoBien);
-        btn_addMonAn = view.findViewById(R.id.btn_add_admin);
+        btn_addMonAn = view.findViewById(R.id.btn_add_admin_burger);
+        tv_all = view.findViewById(R.id.tv_viewAll);
 
+        rcvGetBurger();
+        tv_all.setOnClickListener(v -> {
+            recycleviewphoBien();
+        });
         btn_addMonAn.setOnClickListener(v -> {
             dialogAddMonAn();
         });
 
-        recycleviewphoBien();
+
         return view;
     }
 
@@ -82,8 +85,6 @@ public class burgerFragment extends Fragment {
 
         EditText edt_tenMonAn ,edt_gia, edt_moTa;
         Button btn_add_confirm;
-
-
 
         edt_tenMonAn = dialog.findViewById(R.id.edt_tenMon);
         edt_moTa = dialog.findViewById(R.id.edt_moTa);
@@ -126,6 +127,19 @@ public class burgerFragment extends Fragment {
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
+
+    private void rcvGetBurger(){
+        bgDAO = new burGerDAO(getContext());
+        listMa = bgDAO.getBuger();
+
+        LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rcv_phoBien.setLayoutManager(linearLayoutManager);
+
+        adapterMa = new monAnAdapter(listMa, dbHelper, getContext());
+        rcv_phoBien.setAdapter(adapterMa);
+
+    }
 
     private  void recycleviewphoBien(){
         maDAO = new monAnDAO(getContext());

@@ -24,6 +24,8 @@ import com.example.duan1.database.DbHelper;
 import com.example.duan1.manHinhChinh;
 import com.example.duan1.model.gioHang;
 import com.example.duan1.model.monAn;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 
@@ -55,8 +57,11 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
     @Override
     public void onBindViewHolder(@NonNull monAnViewHolder holder, int position) {
         holder.tv_ten.setText(list.get(position).getTenMonAn());
+        holder.tv_gia.setText(list.get(position).getGiaMonAn()+ " VND");
         holder.tv_moTa.setText(list.get(position).getMoTaMonAn());
-        holder.tv_gia.setText(String.valueOf(list.get(position).getGiaMonAn()+ " VND"));
+
+        String img = list.get(position).getImg();
+        Picasso.get().load(img).into(holder.iv_img);
 
 
         // chuc nang sua mon an admin
@@ -157,14 +162,15 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
 
     public class monAnViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tv_gia, tv_moTa, tv_ten;
-        ImageView btn_gh_themMonAn;
+        TextView tv_gia, tv_moTa, tv_ten ;
+        ImageView btn_gh_themMonAn, iv_img;
 
         public monAnViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_gia = itemView.findViewById(R.id.tv_giaMonAn);
             tv_moTa = itemView.findViewById(R.id.tv_moTaMonAn);
             tv_ten = itemView.findViewById(R.id.tv_tenMonAn);
+            iv_img = itemView.findViewById(R.id.iv_img);
             btn_gh_themMonAn = itemView.findViewById(R.id.btn_gh_addMonAn);
 
         }

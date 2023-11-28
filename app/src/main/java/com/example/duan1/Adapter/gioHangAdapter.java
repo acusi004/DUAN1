@@ -65,6 +65,8 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     @Override
     public gioHangAdapter.gioHangViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_rcv_gio_hang, parent, false);
+        ghDAO = new gioHangDAO(context);
+        ghAdapter = new gioHangAdapter(list, dbHelper, context, ghDAO);
         return new gioHangViewHolder(view);
     }
 
@@ -79,7 +81,10 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
         holder.iv_plus.setOnClickListener(v -> {
            int numberOrder = gh.getSoLuong()+1;
+            int sum = (int) (list.get(position).getGia()* numberOrder);
            holder.tv_soLuong.setText(String.valueOf(numberOrder));
+           holder.tv_gia.setText(String.valueOf(sum)+ " VND");
+           gh.setGia(sum);
            gh.setSoLuong(numberOrder);
            ghDAO.update(gh);
            updateListGioHang();
@@ -95,10 +100,16 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
             if(numberOrder>1){
                 numberOrder -= 1;
+                int sum = (int) (list.get(position).getGia()* numberOrder);
                 holder.tv_soLuong.setText(String.valueOf(numberOrder));
+                holder.tv_gia.setText(String.valueOf(sum)+ " VND");
+                gh.setGia(sum);
                 gh.setSoLuong(numberOrder);
                 ghDAO.update(gh);
+
+                // thuc hien hiển thị dữ liệu mới lên
                 updateListGioHang();
+
                 if(minusSoLuong != null){
                     minusSoLuong.minusSoLuongClick(holder.getAdapterPosition());
                 }
@@ -155,7 +166,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
         TextView tv_tenMon, tv_soLuong, tv_gia;
 
-        ImageView iv_plus, iv_minus;
+        ImageView iv_plus, iv_minus, iv_img_gh;
 
         public gioHangViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -164,6 +175,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
             tv_tenMon = itemView.findViewById(R.id.tv_gh_tenMon);
             iv_plus = itemView.findViewById(R.id.plus);
             iv_minus = itemView.findViewById(R.id.minus);
+            iv_img_gh = itemView.findViewById(R.id.iv_img_gh);
         }
     }
 
@@ -179,7 +191,6 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     public void updateListGioHang(){
         list.clear();
         list.addAll(ghDAO.getAll());
-        ghAdapter = new gioHangAdapter(list, dbHelper, context, ghDAO);
         ghAdapter.notifyDataSetChanged();
     }
 

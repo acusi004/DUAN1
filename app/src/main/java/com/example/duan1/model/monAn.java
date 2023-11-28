@@ -8,28 +8,25 @@ public class monAn {
 
     private String moTaMonAn;
 
-    private int maLoai;
+    private String img;
 
     private String tenLoai;
 
-
-
-
-
-
-    public monAn(int maMonAn, String tenMonAn, int giaMonAn, String moTaMonAn) {
+    public monAn(int maMonAn, String tenMonAn, int giaMonAn, String moTaMonAn, String img, String tenLoai) {
         this.maMonAn = maMonAn;
         this.tenMonAn = tenMonAn;
         this.giaMonAn = giaMonAn;
         this.moTaMonAn = moTaMonAn;
-
+        this.img = img;
+        this.tenLoai = tenLoai;
     }
 
-    public monAn(String tenMonAn, int giaMonAn, String moTaMonAn, int maLoai) {
+    public monAn(int maMonAn, String tenMonAn, int giaMonAn, String moTaMonAn, String tenLoai) {
+        this.maMonAn = maMonAn;
         this.tenMonAn = tenMonAn;
         this.giaMonAn = giaMonAn;
         this.moTaMonAn = moTaMonAn;
-        this.maLoai = maLoai;
+        this.tenLoai = tenLoai;
     }
 
     public monAn() {
@@ -68,20 +65,19 @@ public class monAn {
     public void setMaMonAn(int maMonAn) {
         this.maMonAn = maMonAn;
     }
-
-    public int getMaLoai() {
-        return maLoai;
-    }
-
-    public void setMaLoai(int maLoai) {
-        this.maLoai = maLoai;
-    }
-
     public String getTenLoai() {
         return tenLoai;
     }
 
     public void setTenLoai(String tenLoai) {
         this.tenLoai = tenLoai;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

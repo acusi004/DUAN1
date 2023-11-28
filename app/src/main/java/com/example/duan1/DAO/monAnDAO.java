@@ -29,31 +29,23 @@ public class monAnDAO {
                 list.add(new monAn(cursor.getInt(0),
                         cursor.getString(1),
                         cursor.getInt(2),
-                        cursor.getString(3)));
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5)));
             }while (cursor.moveToNext());
         }
         return list;
     }
 
-    public monAn getById(int id){
-        Cursor cursor = database.query("MONAN", null, "mamonan =?", new String[]{String.valueOf(id)}, null, null, null );
-        if(cursor.moveToNext()){
-            return new monAn(cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getInt(2),
-                    cursor.getString(3));
-        }else{
-            return null;
-        }
-    }
+
 
     public boolean add(monAn ma){
         database = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("MAMONAN", ma.getMaMonAn());
         cv.put("TENMON",ma.getTenMonAn());
         cv.put("GIAMON",ma.getGiaMonAn());
         cv.put("MOTA", ma.getMoTaMonAn());
+        cv.put("HINHANH", ma.getImg());
         long check = database.insert("MONAN", null, cv);
         if(check ==-1){
             return false;
