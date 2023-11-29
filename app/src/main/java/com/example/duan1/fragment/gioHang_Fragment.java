@@ -14,20 +14,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.duan1.Adapter.gioHangAdapter;
-import com.example.duan1.Adapter.gioHangAdapter.onSoLuongDownClickListener;
-import com.example.duan1.Adapter.gioHangAdapter.onSoLuongUpClickListener;
+
 import com.example.duan1.DAO.gioHangDAO;
 import com.example.duan1.R;
 import com.example.duan1.database.DbHelper;
+import com.example.duan1.model.donHang;
 import com.example.duan1.model.gioHang;
 
 import java.util.ArrayList;
 
 
-public class gioHang_Fragment extends Fragment implements onSoLuongUpClickListener, onSoLuongDownClickListener{
+public class gioHang_Fragment extends Fragment{
 
     RecyclerView rcv_gioHang;
     Button btn_datHang;
@@ -39,6 +41,8 @@ public class gioHang_Fragment extends Fragment implements onSoLuongUpClickListen
     DbHelper dbHelper;
     TextView tv_sumMonAn;
 
+    donHang dh;
+
 
 
     @Override
@@ -46,20 +50,41 @@ public class gioHang_Fragment extends Fragment implements onSoLuongUpClickListen
 
         View view = inflater.inflate(R.layout.fragment_gio_hang_, container, false);
         rcv_gioHang = view.findViewById(R.id.rcv_gioHang);
-        tv_sumMonAn = view.findViewById(R.id.tv_giaTongSoLuongMonAn);
+
         btn_datHang = view.findViewById(R.id.btn_datHang);
 
         btn_datHang.setOnClickListener(v -> {
               datHangDiaLog();
         });
         recyclerViewGioHang();
-        updateGia();
+
         return view;
     }
 
     public void datHangDiaLog(){
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_item_confirm_gio_hang);
+
+        EditText edt_sdt, edt_diaChi;
+        Button btn_confirm;
+
+        edt_sdt = dialog.findViewById(R.id.edt_dh_sdt);
+        edt_diaChi = dialog.findViewById(R.id.edt_dh_diaChi);
+        btn_confirm = dialog.findViewById(R.id.btn__dh_xacNhanDatHang);
+
+        btn_confirm.setOnClickListener(v -> {
+            String sdt = edt_sdt.getText().toString();
+            String diaChi = edt_diaChi.getText().toString();
+
+            if(sdt.equals("")||diaChi.equals("")){
+                Toast.makeText(getContext(), "Cần nhạp dữ liệu", Toast.LENGTH_SHORT).show();
+            }else{
+                dh = new donHang();
+                dh.setDiaChi(diaChi);
+                dh.setSdt(Integer.parseInt(sdt));
+
+            }
+        });
 
 //        code o day
 
@@ -81,8 +106,7 @@ public class gioHang_Fragment extends Fragment implements onSoLuongUpClickListen
         rcv_gioHang.setLayoutManager(linearLayoutManager);
 
        ghAdapter = new gioHangAdapter(list,dbHelper, getContext(), ghDAO);
-       ghAdapter.setOnSoLuongDownClickListener(this);
-       ghAdapter.setOnSoLuongUpClickListener(this);
+
        rcv_gioHang.setAdapter(ghAdapter);
        ghAdapter.notifyDataSetChanged();
 
@@ -93,28 +117,10 @@ public class gioHang_Fragment extends Fragment implements onSoLuongUpClickListen
 
 
 
-    private int sumDonHang(){
-        int gia = 0;
-        for(gioHang gh: list){
-            gia += gh.getGia();
-        }
 
-        return gia;
-    }
 
-    private void updateGia(){
-        int gia = sumDonHang();
-        tv_sumMonAn.setText(String.valueOf(gia)+" VND");
 
-    }
 
-    @Override
-    public void plusSoLuongClick(int position) {
-        updateGia();
-    }
 
-    @Override
-    public void minusSoLuongClick(int position) {
-        updateGia();
-    }
+
 }

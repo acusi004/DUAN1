@@ -32,7 +32,8 @@ public class burGerDAO {
                         cursor.getString(1),
                         cursor.getInt(2),
                         cursor.getString(3),
-                        cursor.getString(4)));
+                        cursor.getString(4),
+                        cursor.getString(5)));
             }while (cursor.moveToNext());
         }
         cursor.close();

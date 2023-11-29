@@ -21,7 +21,7 @@
             android:padding="9dp"
             />
         <EditText
-            android:id="@+id/ed_dialog_invoice_confirm_address"
+            android:id="@+id/edt_dh_sdt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="10dp"
@@ -42,7 +42,7 @@
             android:padding="9dp"
             />
         <EditText
-            android:id="@+id/ed_dialog_SDT"
+            android:id="@+id/edt_dh_diaChi"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="10dp"
@@ -59,7 +59,7 @@
            android:gravity="center">
 
            <Button
-               android:id="@+id/btn_dangKy"
+               android:id="@+id/btn__dh_xacNhanDatHang"
                android:layout_width="200dp"
                android:layout_height="50dp"
                android:background="@drawable/bg_button"

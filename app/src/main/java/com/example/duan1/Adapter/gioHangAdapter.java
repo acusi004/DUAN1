@@ -23,6 +23,7 @@ import com.example.duan1.R;
 import com.example.duan1.database.DbHelper;
 import com.example.duan1.model.gioHang;
 import com.example.duan1.model.monAn;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,8 +43,6 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     gioHang gh;
 
 
-    private onSoLuongUpClickListener plusSoLuong;
-    private onSoLuongDownClickListener minusSoLuong;
 
     public gioHangAdapter(ArrayList<gioHang> list, DbHelper dbHelper, Context context, gioHangDAO ghDAO) {
         this.list = list;
@@ -52,12 +51,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
         this.ghDAO = ghDAO;
     }
 
-    public void setOnSoLuongDownClickListener(onSoLuongDownClickListener minusSoLuong) {
-        this.minusSoLuong = minusSoLuong;
-    }
-    public void setOnSoLuongUpClickListener(onSoLuongUpClickListener listener){
-        this.plusSoLuong = listener;
-    }
+
 
 
 
@@ -76,8 +70,10 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
 
         holder.tv_tenMon.setText(list.get(position).getTenMonAn());
-        holder.tv_gia.setText(String.valueOf(list.get(position).getGia()));
+        holder.tv_gia.setText(String.valueOf(list.get(position).getGia()+ " VND"));
 
+        String img = list.get(position).getImg();
+        Picasso.get().load(img).into(holder.iv_img_gh);
 
         holder.iv_plus.setOnClickListener(v -> {
            int numberOrder = gh.getSoLuong()+1;
@@ -89,9 +85,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
            ghDAO.update(gh);
            updateListGioHang();
 
-           if(plusSoLuong != null) {
-               plusSoLuong.plusSoLuongClick(holder.getAdapterPosition());
-           }
+
         });
 
         holder.iv_minus.setOnClickListener(v -> {
@@ -110,9 +104,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
                 // thuc hien hiển thị dữ liệu mới lên
                 updateListGioHang();
 
-                if(minusSoLuong != null){
-                    minusSoLuong.minusSoLuongClick(holder.getAdapterPosition());
-                }
+
             }else{
                 Toast.makeText(context, "Số lượng không thể nhỏ hơn 1", Toast.LENGTH_SHORT).show();
             }
@@ -180,13 +172,7 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     }
 
 
-    public interface onSoLuongUpClickListener{
-        void plusSoLuongClick(int position);
-    }
 
-    public interface onSoLuongDownClickListener{
-        void minusSoLuongClick(int position);
-    }
 
     public void updateListGioHang(){
         list.clear();

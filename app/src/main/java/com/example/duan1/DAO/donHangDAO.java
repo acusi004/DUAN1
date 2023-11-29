@@ -25,8 +25,7 @@ public class donHangDAO {
         cv.put("TRANGTHAI",dh.getTrangThai());
         cv.put("SDT", dh.getSdt());
         cv.put("DIACHI", dh.getDiaChi());
-        cv.put("THOIGIAN", dh.getThoiGian());
-        cv.put("MAGIOHANG", dh.getMaGioHang());
+        cv.put("THOIGIAN", dh.getNgay());
         long result = database.insert("DONHANG", null, cv);
         if(result==-1){
             return false;
@@ -38,13 +37,24 @@ public class donHangDAO {
     public ArrayList<donHang> getAll(){
         ArrayList<donHang> list = new ArrayList<>();
         database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT dh.MADONHANG,dh.TRANGTHAI,dh.SDT,dh.DIACHI, dh.THOIGIAN, ma.TENMON, ma.GIAMON, gh.SOLUONG FROM DONHANG dh, MONAN ma, GIOHANG gh WHERE dh.magiohang = gh.magiohang AND dh.MAMONAN = ma.mamonan", null);
+        Cursor cursor = database.rawQuery("SELECT dh.madonhang, ma.mamonan,gh.magiohang, ma.tenmon, ma.giamon, gh.soluong, dh.TRANGTHAI, dh.SDT, dh.DIACHI, dh.THOIGIAN FROM  DONHANG dh, MONAN ma, GIOHANG gh WHERE dh.mamonan = ma.mamonan and dh.magiohang = gh.magiohang", null);
         if(cursor.getCount()>0){
             cursor.moveToFirst();
             do{
-
+                list.add(new donHang(cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getInt(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getString(5),
+                        cursor.getInt(6),
+                        cursor.getInt(7),
+                        cursor.getInt(8),
+                        cursor.getString(9),
+                        cursor.getString(10)));
             }while (cursor.moveToNext());
         }
+        cursor.close();
         return list;
 
     }

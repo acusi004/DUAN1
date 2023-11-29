@@ -1,120 +1,122 @@
 package com.example.duan1.model;
 
 public class donHang {
-    private int maDonHang;
-    private int trangThai;
-    private int sdt;
-    private String diaChi;
-    private String thoiGian;
-    private int maGioHang;
-    private int maMonAn;
+   private int idDonHang;
+   private int idMonAn;
+   private int idGioHang;
 
-    private String tenMonAn;
-    private int soLuong;
-    private int gia;
+   private String tenMon;
+   private int giaMon;
 
+   private String img;
+   private int soLuong;
+   private int trangThai;
+   private int sdt;
+   private String  diaChi;
+   private String  ngay;
 
-    public donHang(int maDonHang, int trangThai, int sdt, String diaChi, String thoiGian, int maGioHang, int maMonAn) {
-        this.maDonHang = maDonHang;
-        this.trangThai = trangThai;
-        this.sdt = sdt;
-        this.diaChi = diaChi;
-        this.thoiGian = thoiGian;
-        this.maGioHang = maGioHang;
-        this.maMonAn = maMonAn;
-    }
+   public donHang() {
+   }
 
+   public donHang(int idDonHang, int idMonAn, int idGioHang, String tenMon, int giaMon, String img, int soLuong, int trangThai, int sdt, String diaChi, String ngay) {
+      this.idDonHang = idDonHang;
+      this.idMonAn = idMonAn;
+      this.idGioHang = idGioHang;
+      this.tenMon = tenMon;
+      this.giaMon = giaMon;
+      this.img = img;
+      this.soLuong = soLuong;
+      this.trangThai = trangThai;
+      this.sdt = sdt;
+      this.diaChi = diaChi;
+      this.ngay = ngay;
+   }
 
-    public donHang(int maDonHang, int trangThai, int sdt, String diaChi, String thoiGian, int maGioHang, int maMonAn, String tenMonAn, int soLuong, int gia) {
-        this.maDonHang = maDonHang;
-        this.trangThai = trangThai;
-        this.sdt = sdt;
-        this.diaChi = diaChi;
-        this.thoiGian = thoiGian;
-        this.maGioHang = maGioHang;
-        this.maMonAn = maMonAn;
-        this.tenMonAn = tenMonAn;
-        this.soLuong = soLuong;
-        this.gia = gia;
-    }
+   public int getIdDonHang() {
+      return idDonHang;
+   }
 
-    public int getMaDonHang() {
-        return maDonHang;
-    }
+   public void setIdDonHang(int idDonHang) {
+      this.idDonHang = idDonHang;
+   }
 
-    public void setMaDonHang(int maDonHang) {
-        this.maDonHang = maDonHang;
-    }
+   public int getIdMonAn() {
+      return idMonAn;
+   }
 
-    public int getTrangThai() {
-        return trangThai;
-    }
+   public void setIdMonAn(int idMonAn) {
+      this.idMonAn = idMonAn;
+   }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
+   public int getIdGioHang() {
+      return idGioHang;
+   }
 
-    public int getSdt() {
-        return sdt;
-    }
+   public void setIdGioHang(int idGioHang) {
+      this.idGioHang = idGioHang;
+   }
 
-    public void setSdt(int sdt) {
-        this.sdt = sdt;
-    }
+   public String getTenMon() {
+      return tenMon;
+   }
 
-    public String getDiaChi() {
-        return diaChi;
-    }
+   public void setTenMon(String tenMon) {
+      this.tenMon = tenMon;
+   }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
+   public int getGiaMon() {
+      return giaMon;
+   }
 
-    public String getThoiGian() {
-        return thoiGian;
-    }
+   public void setGiaMon(int giaMon) {
+      this.giaMon = giaMon;
+   }
 
-    public void setThoiGian(String thoiGian) {
-        this.thoiGian = thoiGian;
-    }
+   public int getSoLuong() {
+      return soLuong;
+   }
 
-    public int getMaGioHang() {
-        return maGioHang;
-    }
+   public void setSoLuong(int soLuong) {
+      this.soLuong = soLuong;
+   }
 
-    public void setMaGioHang(int maGioHang) {
-        this.maGioHang = maGioHang;
-    }
+   public int getTrangThai() {
+      return trangThai;
+   }
 
-    public int getMaMonAn() {
-        return maMonAn;
-    }
+   public void setTrangThai(int trangThai) {
+      this.trangThai = trangThai;
+   }
 
-    public void setMaMonAn(int maMonAn) {
-        this.maMonAn = maMonAn;
-    }
+   public int getSdt() {
+      return sdt;
+   }
 
-    public String getTenMonAn() {
-        return tenMonAn;
-    }
+   public void setSdt(int sdt) {
+      this.sdt = sdt;
+   }
 
-    public void setTenMonAn(String tenMonAn) {
-        this.tenMonAn = tenMonAn;
-    }
+   public String getDiaChi() {
+      return diaChi;
+   }
 
-    public int getSoLuong() {
-        return soLuong;
-    }
+   public void setDiaChi(String diaChi) {
+      this.diaChi = diaChi;
+   }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
+   public String getNgay() {
+      return ngay;
+   }
 
-    public int getGia() {
-        return gia;
-    }
+   public void setNgay(String ngay) {
+      this.ngay = ngay;
+   }
 
-    public void setGia(int gia) {
-        this.gia = gia;
-    }
+   public String getImg() {
+      return img;
+   }
+
+   public void setImg(String img) {
+      this.img = img;
+   }
 }

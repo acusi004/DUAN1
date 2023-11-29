@@ -7,7 +7,9 @@ public class gioHang {
 
     private String tenMonAn;
     private int soLuong;
-    private double gia;
+    private int gia;
+
+    private String img;
 
 
 
@@ -17,19 +19,14 @@ public class gioHang {
     public gioHang() {
     }
 
-    public gioHang(int maGioHang, int maMonAn, String tenMonAn, int soLuong, double gia) {
-        this.maGioHang = maGioHang;
-        this.maMonAn = maMonAn;
-        this.tenMonAn = tenMonAn;
-        this.soLuong = soLuong;
-        this.gia = gia;
-    }
 
-    public gioHang(int maGioHang, int maMonAn, String tenMonAn, double gia) {
+
+    public gioHang(int maGioHang, int maMonAn, String tenMonAn, int gia, String img) {
         this.maGioHang = maGioHang;
         this.maMonAn = maMonAn;
         this.tenMonAn = tenMonAn;
         this.gia = gia;
+        this.img = img;
     }
 
     public int getMaGioHang() {
@@ -56,11 +53,11 @@ public class gioHang {
         this.soLuong = soLuong;
     }
 
-    public double getGia() {
+    public int getGia() {
         return gia;
     }
 
-    public void setGia(double gia) {
+    public void setGia(int gia) {
         this.gia = gia;
     }
 
@@ -70,5 +67,13 @@ public class gioHang {
 
     public void setTenMonAn(String tenMonAn) {
         this.tenMonAn = tenMonAn;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }
