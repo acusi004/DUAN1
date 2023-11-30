@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangViewHolder> {
 
-    ArrayList<gioHang> list = new ArrayList<>();
+    ArrayList<gioHang> list;
     DbHelper dbHelper;
     Context context;
     private gioHangDAO ghDAO;
@@ -68,7 +68,6 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     public void onBindViewHolder(@NonNull gioHangAdapter.gioHangViewHolder holder, int position) {
         gioHang gh = list.get(position);
 
-
         holder.tv_tenMon.setText(list.get(position).getTenMonAn());
         holder.tv_gia.setText(String.valueOf(list.get(position).getGia()+ " VND"));
 
@@ -77,16 +76,17 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
         holder.iv_plus.setOnClickListener(v -> {
            int numberOrder = gh.getSoLuong()+1;
-            int sum = (int) (list.get(position).getGia()* numberOrder);
+           int sum = (int) (list.get(position).getGia()* numberOrder);
            holder.tv_soLuong.setText(String.valueOf(numberOrder));
            holder.tv_gia.setText(String.valueOf(sum)+ " VND");
            gh.setGia(sum);
            gh.setSoLuong(numberOrder);
            ghDAO.update(gh);
            updateListGioHang();
-
-
         });
+
+
+
 
         holder.iv_minus.setOnClickListener(v -> {
 

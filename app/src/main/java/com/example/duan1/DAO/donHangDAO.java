@@ -22,10 +22,12 @@ public class donHangDAO {
     public boolean insertDonHang(donHang dh){
         database = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put("MAGIOHANG", dh.getIdGioHang());
+        cv.put("MAMONAN", dh.getIdMonAn());
         cv.put("TRANGTHAI",dh.getTrangThai());
         cv.put("SDT", dh.getSdt());
         cv.put("DIACHI", dh.getDiaChi());
-        cv.put("THOIGIAN", dh.getNgay());
+
         long result = database.insert("DONHANG", null, cv);
         if(result==-1){
             return false;
@@ -37,7 +39,7 @@ public class donHangDAO {
     public ArrayList<donHang> getAll(){
         ArrayList<donHang> list = new ArrayList<>();
         database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT dh.madonhang, ma.mamonan,gh.magiohang, ma.tenmon, ma.giamon, gh.soluong, dh.TRANGTHAI, dh.SDT, dh.DIACHI, dh.THOIGIAN FROM  DONHANG dh, MONAN ma, GIOHANG gh WHERE dh.mamonan = ma.mamonan and dh.magiohang = gh.magiohang", null);
+        Cursor cursor = database.rawQuery("SELECT dh.madonhang, ma.mamonan,gh.magiohang, ma.tenmon, ma.giamon, gh.soluong, dh.TRANGTHAI, dh.SDT, dh.DIACHI FROM  DONHANG dh, MONAN ma, GIOHANG gh WHERE dh.mamonan = ma.mamonan and dh.magiohang = gh.magiohang", null);
         if(cursor.getCount()>0){
             cursor.moveToFirst();
             do{
@@ -50,8 +52,7 @@ public class donHangDAO {
                         cursor.getInt(6),
                         cursor.getInt(7),
                         cursor.getInt(8),
-                        cursor.getString(9),
-                        cursor.getString(10)));
+                        cursor.getString(9)));
             }while (cursor.moveToNext());
         }
         cursor.close();

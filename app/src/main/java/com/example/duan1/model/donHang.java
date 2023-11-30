@@ -13,12 +13,12 @@ public class donHang {
    private int trangThai;
    private int sdt;
    private String  diaChi;
-   private String  ngay;
+
 
    public donHang() {
    }
 
-   public donHang(int idDonHang, int idMonAn, int idGioHang, String tenMon, int giaMon, String img, int soLuong, int trangThai, int sdt, String diaChi, String ngay) {
+   public donHang(int idDonHang, int idMonAn, int idGioHang, String tenMon, int giaMon, String img, int soLuong, int trangThai, int sdt, String diaChi) {
       this.idDonHang = idDonHang;
       this.idMonAn = idMonAn;
       this.idGioHang = idGioHang;
@@ -29,7 +29,7 @@ public class donHang {
       this.trangThai = trangThai;
       this.sdt = sdt;
       this.diaChi = diaChi;
-      this.ngay = ngay;
+
    }
 
    public int getIdDonHang() {
@@ -104,13 +104,7 @@ public class donHang {
       this.diaChi = diaChi;
    }
 
-   public String getNgay() {
-      return ngay;
-   }
 
-   public void setNgay(String ngay) {
-      this.ngay = ngay;
-   }
 
    public String getImg() {
       return img;

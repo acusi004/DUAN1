@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="230dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="14dp"
     app:cardElevation="4dp">
@@ -11,12 +11,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
+        android:gravity="center"
         >
 
         <ImageView
             android:id="@+id/iv_img_donHang"
             android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:src="@drawable/pop_2"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"/>
@@ -34,14 +35,6 @@
               android:layout_height="wrap_content"
               android:orientation="horizontal">
 
-              <TextView
-                  android:id="@+id/tv_hd_ngayDat"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="18/05/2023"
-                  android:fontFamily="@font/open_sans_light"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
 
               <TextView
                   android:id="@+id/tv_hd_trangThai"
@@ -64,47 +57,16 @@
               android:paddingBottom="5dp">
 
               <TextView
-                  android:id="@+id/tv_hd_tenMon"
+                  android:id="@+id/tv_hd_content"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="pizza chesse"
+                  android:text="content"
                   android:textSize="17sp"
                   android:textStyle="bold"/>
 
           </LinearLayout>
 
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:paddingBottom="5dp">
 
-              <TextView
-                  android:id="@+id/tv_hd_soLuong"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="2 phan"
-                  android:fontFamily="@font/open_sans_light"
-                  android:textSize="16sp"
-                  android:textStyle="bold"/>
-              <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="-"
-                  android:fontFamily="@font/open_sans_light"
-                  />
-
-              <TextView
-                  android:id="@+id/tv_hd_giaMon"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="150000 VND"
-                  android:fontFamily="@font/open_sans_light"
-                  android:textSize="16sp"
-                  android:textStyle="bold"
-                  />
-
-          </LinearLayout>
 
           <LinearLayout
               android:layout_width="match_parent"

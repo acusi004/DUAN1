@@ -42,6 +42,7 @@ public class monAnDAO {
     public boolean add(monAn ma){
         database = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
+
         cv.put("TENMON",ma.getTenMonAn());
         cv.put("GIAMON",ma.getGiaMonAn());
         cv.put("MOTA", ma.getMoTaMonAn());

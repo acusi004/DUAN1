@@ -132,6 +132,8 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
             btn_them.setOnClickListener(v12 -> {
                 gioHangDAO ghDAO = new gioHangDAO(context);
                 gioHang gh = new gioHang();
+
+
                 gh.setMaMonAn(ma.getMaMonAn());
                 gh.setSoLuong(1);
                 gh.setGia(ma.getGiaMonAn());
