@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.duan1.Adapter.gioHangAdapter;
 
-import com.example.duan1.DAO.donHangDAO;
+import com.example.duan1.DAO.hoaDonDAO;
 import com.example.duan1.DAO.gioHangDAO;
 import com.example.duan1.DAO.monAnDAO;
 import com.example.duan1.R;
@@ -51,7 +51,7 @@ public class gioHang_Fragment extends Fragment{
 
     gioHang gh;
 
-    donHangDAO dhDAO;
+    hoaDonDAO dhDAO;
 
 
 
@@ -60,7 +60,6 @@ public class gioHang_Fragment extends Fragment{
 
         View view = inflater.inflate(R.layout.fragment_gio_hang_, container, false);
         rcv_gioHang = view.findViewById(R.id.rcv_gioHang);
-
         btn_datHang = view.findViewById(R.id.btn_datHang);
 
         btn_datHang.setOnClickListener(v -> {
@@ -83,7 +82,7 @@ public class gioHang_Fragment extends Fragment{
         maDAO = new monAnDAO(getContext());
 
         edt_sdt = dialog.findViewById(R.id.edt_dh_sdt);
-        edt_diaChi = dialog.findViewById(R.id.edt_dh_diaChi);
+        edt_diaChi = dialog.findViewById(R.id.edt_dh_diachi);
         tv_content = dialog.findViewById(R.id.tv_dialog_hd_confirm_content);
         tv_price = dialog.findViewById(R.id.tv_dialog_hd_confirm_priceSum);
         btn_confirm = dialog.findViewById(R.id.btn__dh_xacNhanDatHang);
@@ -96,7 +95,7 @@ public class gioHang_Fragment extends Fragment{
         for(gioHang gh : list){
             for(monAn ma: listMa){
                 if(ma.getMaMonAn() == gh.getMaMonAn()){
-                    dataGioHang += "-" + ma.getTenMonAn() + "(" + gh.getGia() + " VND)" + ", So luong: " + gh.getSoLuong() + "\n";
+                    dataGioHang += " - " + ma.getTenMonAn() + " (" + gh.getGia() + " VNĐ) " + ", Số lượng: " + gh.getSoLuong() + "\n";
                     break;
                 }
             }
@@ -112,33 +111,46 @@ public class gioHang_Fragment extends Fragment{
         btn_confirm.setOnClickListener(v -> {
             String sdt = edt_sdt.getText().toString();
             String diaChi = edt_diaChi.getText().toString();
+            String  Content = tv_content.getText().toString();
 
-            if(sdt.equals("")||diaChi.equals("")){
-                Toast.makeText(getContext(), "Cần nhạp dữ liệu", Toast.LENGTH_SHORT).show();
-            }else{
-                dhDAO = new donHangDAO(getContext());
+            if (diaChi.trim().isEmpty()) {
+                Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            } else if (sdt.trim().isEmpty()) {
+                Toast.makeText(getContext(), "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
+            } else if(content.isEmpty()){
+                Toast.makeText(getContext(), "Hãy chọn món ăn trước khi đặt hàng", Toast.LENGTH_SHORT).show();
+            }else {
+
+                int phone = 0;
+                try{
+                    phone = Integer.parseInt(sdt);
+                }catch (NumberFormatException e){
+                    Toast.makeText(getContext(), "Số điện thoại phải là một số", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                dhDAO = new hoaDonDAO(getContext());
                 gh = new gioHang();
                 dh = new donHang();
                 dh.setDiaChi(diaChi);
                 dh.setSdt(Integer.parseInt(sdt));
-                dh.setGiaMon(gh.getGia());
-                dh.setImg(gh.getImg());
-                dh.setTenMon(gh.getTenMonAn());
-                dh.setSoLuong(gh.getSoLuong());
+                dh.setContent(Content);
+                dh.setTrangThai(dh.getTrangThai());
+                dh.setTongTien(calculateTotalSum());
 
                 if(!(dhDAO.insertDonHang(dh))){
                     Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+
                 }
 
-
-
             }
+
+
         });
 
-//        code o day
 
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -147,6 +159,8 @@ public class gioHang_Fragment extends Fragment{
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
+
+
 
     public void recyclerViewGioHang(){
 

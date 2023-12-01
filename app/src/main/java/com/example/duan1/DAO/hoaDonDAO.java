@@ -4,29 +4,31 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.duan1.database.DbHelper;
 import com.example.duan1.model.donHang;
 
 import java.util.ArrayList;
 
-public class donHangDAO {
+public class hoaDonDAO {
 
     DbHelper dbHelper;
     SQLiteDatabase database;
 
-    public donHangDAO(Context context) {
+    public hoaDonDAO(Context context) {
        dbHelper = new DbHelper(context);
     }
 
     public boolean insertDonHang(donHang dh){
         database = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("MAGIOHANG", dh.getIdGioHang());
-        cv.put("MAMONAN", dh.getIdMonAn());
+        cv.put("MAGIOHANG",dh.getIdGioHang());
         cv.put("TRANGTHAI",dh.getTrangThai());
         cv.put("SDT", dh.getSdt());
         cv.put("DIACHI", dh.getDiaChi());
+        cv.put("CONTENT", dh.getContent());
+        cv.put("TONGTIEN", dh.getTongTien());
 
         long result = database.insert("DONHANG", null, cv);
         if(result==-1){
@@ -39,25 +41,39 @@ public class donHangDAO {
     public ArrayList<donHang> getAll(){
         ArrayList<donHang> list = new ArrayList<>();
         database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT dh.madonhang, ma.mamonan,gh.magiohang, ma.tenmon, ma.giamon, gh.soluong, dh.TRANGTHAI, dh.SDT, dh.DIACHI FROM  DONHANG dh, MONAN ma, GIOHANG gh WHERE dh.mamonan = ma.mamonan and dh.magiohang = gh.magiohang", null);
+        Cursor cursor = database.rawQuery("SELECT DONHANG.madonhang,GIOHANG.magiohang, DONHANG.TONGTIEN, DONHANG.trangthai, DONHANG.sdt, DONHANG.diachi, DONHANG.content FROM DONHANG,GIOHANG ", null);
         if(cursor.getCount()>0){
             cursor.moveToFirst();
             do{
                 list.add(new donHang(cursor.getInt(0),
                         cursor.getInt(1),
                         cursor.getInt(2),
-                        cursor.getString(3),
+                        cursor.getInt(3),
                         cursor.getInt(4),
                         cursor.getString(5),
-                        cursor.getInt(6),
-                        cursor.getInt(7),
-                        cursor.getInt(8),
-                        cursor.getString(9)));
+                        cursor.getString(6)));
             }while (cursor.moveToNext());
+        }else{
+            Log.d(String.valueOf(list.size()), ".. ");
         }
         cursor.close();
         return list;
 
     }
+
+    public boolean updateTT(int madh){
+        database = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("TRANGTHAI", madh);
+       long check =  database.update("DONHANG", cv, "madonhang = ?",new String[]{String.valueOf(madh)});
+        if(check==-1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+
+
 
 }

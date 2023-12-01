@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.lichSu_Fragment"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_donHang"
+        android:id="@+id/search_lichSu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
@@ -23,7 +22,7 @@
         android:padding="15dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_donHang"
+        android:id="@+id/rcv_lichSu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

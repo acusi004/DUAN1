@@ -74,9 +74,10 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
         String img = list.get(position).getImg();
         Picasso.get().load(img).into(holder.iv_img_gh);
 
+        int pricePlus = list.get(position).getGia();
         holder.iv_plus.setOnClickListener(v -> {
            int numberOrder = gh.getSoLuong()+1;
-           int sum = (int) (list.get(position).getGia()* numberOrder);
+           int sum = (int) (pricePlus * numberOrder);
            holder.tv_soLuong.setText(String.valueOf(numberOrder));
            holder.tv_gia.setText(String.valueOf(sum)+ " VND");
            gh.setGia(sum);
@@ -87,14 +88,14 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
 
 
 
-
+        int priceMinus = list.get(position).getGia();
         holder.iv_minus.setOnClickListener(v -> {
 
             int numberOrder = gh.getSoLuong();
 
             if(numberOrder>1){
                 numberOrder -= 1;
-                int sum = (int) (list.get(position).getGia()* numberOrder);
+                int sum = (int) (priceMinus* numberOrder);
                 holder.tv_soLuong.setText(String.valueOf(numberOrder));
                 holder.tv_gia.setText(String.valueOf(sum)+ " VND");
                 gh.setGia(sum);
