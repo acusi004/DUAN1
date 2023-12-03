@@ -13,14 +13,15 @@ public class donHang {
    public donHang() {
    }
 
-   public donHang(int idDonHang, int idGioHang, int tongTien, int trangThai, int sdt, String diaChi, String content) {
+
+
+   public donHang(int idDonHang,int trangThai, int sdt, String diaChi, String content,  int tongTien) {
       this.idDonHang = idDonHang;
-      this.idGioHang = idGioHang;
-      this.tongTien = tongTien;
       this.trangThai = trangThai;
       this.sdt = sdt;
       this.diaChi = diaChi;
       this.content = content;
+      this.tongTien = tongTien;
    }
 
    public int getTrangThai() {

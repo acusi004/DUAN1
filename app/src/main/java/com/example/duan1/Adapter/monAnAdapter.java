@@ -138,11 +138,13 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
                 gh.setSoLuong(1);
                 gh.setGia(ma.getGiaMonAn());
                 if(!(ghDAO.addMon(gh))){
-                    Toast.makeText(context, "them that bai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(context, "them thanh cong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
+
+
 
             });
 

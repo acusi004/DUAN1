@@ -33,6 +33,16 @@ public class gioHangDAO {
 
     }
 
+    public boolean checkFood(int idfood){
+        database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM MONAN WHERE MAMONAN =?", new String[]{String.valueOf(idfood)});
+        if(cursor.getCount()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     public ArrayList<gioHang> getAll(){
         ArrayList<gioHang> list = new ArrayList<>();

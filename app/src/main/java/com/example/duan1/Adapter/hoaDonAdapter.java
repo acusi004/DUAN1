@@ -51,6 +51,7 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         holder.tv_content.setText(list.get(position).getContent());
         holder.tv_diaChi.setText(list.get(position).getDiaChi());
         holder.tv_sdt.setText( "0"+String.valueOf(+list.get(position).getSdt()));
+
         String tt = "";
         if(list.get(position).getTrangThai() ==0){
             tt = "ĐANG GIAO HÀNG";
@@ -63,14 +64,17 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
 
         holder.btn_confirm_donHang.setOnClickListener(v -> {
             dhDAO = new hoaDonDAO(context);
-            boolean check = dhDAO.updateTT(list.get(position).getTrangThai());
+
+
+            boolean check = dhDAO.updateTT(list.get(holder.getAdapterPosition()).getTrangThai());
+
             if(check){
                 list.clear();
                 list = dhDAO.getAll();
                 notifyDataSetChanged();
                 Toast.makeText(context, "da nhan hang", Toast.LENGTH_SHORT).show();
             }else{
-                Toast.makeText(context, "chu nhan hang", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "chua nhan hang", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -102,19 +106,7 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         }
     }
 
-    private int calculateTotalSum() {
 
-        ArrayList<gioHang> listGh = new ArrayList<>();
-        gioHangDAO ghDAO = new gioHangDAO(context);
-        listGh = ghDAO.getAll();
-
-
-        int totalSum = 0;
-        for (gioHang gh : listGh) {
-            totalSum += gh.getGia();
-        }
-        return totalSum;
-    }
 
 
 
