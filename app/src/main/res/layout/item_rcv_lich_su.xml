@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="18dp"
     app:cardElevation="4dp"
+    android:layout_marginBottom="10dp"
     >
 
     <LinearLayout
@@ -12,18 +13,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
+        android:gravity="center"
         >
 
         <ImageView
             android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:src="@drawable/pop_2"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
             >
@@ -44,7 +46,7 @@
 
 
                 <TextView
-                    android:id="@+id/tv_hd_trangThai"
+                    android:id="@+id/tv_ls_trangThai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="GIAO THAT BAI"
@@ -97,7 +99,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_ls_diaChi"
@@ -108,6 +110,39 @@
                     android:textSize="16sp"
                     android:textStyle="bold"/>
 
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="5dp"
+                    android:background="@android:color/holo_red_dark" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:text="Tổng Tiền:"
+                        android:layout_margin="5dp"
+                        android:layout_width="100dp"
+                        android:textColor="#F44336"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/open_sans_light"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tv_ls_sum"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:text="500000"
+                        android:textSize="18dp"
+                        android:textColor="#F44336"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
 
 
             </LinearLayout>

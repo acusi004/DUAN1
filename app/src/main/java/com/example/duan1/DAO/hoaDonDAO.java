@@ -50,7 +50,8 @@ public class hoaDonDAO {
                         cursor.getInt(2),
                         cursor.getString(3),
                         cursor.getString(4),
-                        cursor.getInt(5)));
+                        cursor.getInt(5),
+                        cursor.getString(6)));
             }while (cursor.moveToNext());
         }
         cursor.close();

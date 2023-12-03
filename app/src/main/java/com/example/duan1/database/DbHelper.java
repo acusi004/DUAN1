@@ -9,9 +9,8 @@ import androidx.annotation.Nullable;
 public class DbHelper extends SQLiteOpenHelper {
 
 
-
-    public DbHelper( Context context) {
-        super(context,"monAn", null, 1);
+    public DbHelper(Context context) {
+        super(context, "monAn", null, 1);
     }
 
     @Override
@@ -30,11 +29,10 @@ public class DbHelper extends SQLiteOpenHelper {
         String gioHang = "CREATE TABLE GIOHANG (MAGIOHANG INTEGER PRIMARY KEY AUTOINCREMENT,SOLUONG INTEGER, SUM INTEGER, MAMONAN INTEGER REFERENCES MONAN(MAMONAN))";
         db.execSQL(gioHang);
 
-        String donHang = "CREATE TABLE DONHANG (MADONHANG INTEGER PRIMARY KEY AUTOINCREMENT, TRANGTHAI INTEGER ,SDT INTEGER, DIACHI TEXT, CONTENT TEXT,TONGTIEN INTEGER, MAGIOHANG INTEGER REFERENCES GIOHANG(MAGIOHANG))";
+        String donHang = "CREATE TABLE DONHANG (MADONHANG INTEGER PRIMARY KEY AUTOINCREMENT, TRANGTHAI INTEGER ,SDT INTEGER, DIACHI TEXT, CONTENT TEXT,TONGTIEN INTEGER,DATE TEXT, MAGIOHANG INTEGER REFERENCES GIOHANG(MAGIOHANG))";
         db.execSQL(donHang);
 
-        String lichSu = "CREATE TABLE LICHSU (MALICHSU INTEGER PRIMARY KEY AUTOINCREMENT, MAMONAN INTEGER REFERENCES MONAN(MAMONAN), MAGIOHANG INTEGER REFERENCES GIOHANG(MAGIOHANG), MADONHANG INTEGER REFERENCES DONHANG(MADONHANG))";
-        db.execSQL(lichSu);
+
 
 
         // them du lieu mau vao bang
@@ -60,20 +58,19 @@ public class DbHelper extends SQLiteOpenHelper {
                 "(15, 'Velvet Grape Splash', 29000, ' Hương vị tinh tế của nho và vải, ','https://i.pinimg.com/236x/e8/b4/e5/e8b4e57c0a3e814d669c37d3b84a3225.jpg', 'nuoc uong')");
 
 
-//        db.execSQL("INSERT INTO MONAN VALUES" +
-//                "(1, 'Burger Classic', 150000,  'Một chiếc burger thơm ngon với bánh mì mềm mại, ')," +
-//                "(2, ' Pizza Pepperoni', 250000, 'Chiếc pizza nổi tiếng với lớp phô mai béo ngậy, ')," +
-//                "(3, ' Bánh Mì Gà Cajun', 350000, 'Gà nướng với gia vị Cajun đặc trưng, ăn kèm với bánh mì giòn tan')," +
+//        db.execSQL("INSERT INTO MONAN VALUES" + "(1, 'Burger Classic', 150000,  'Một chiếc burger
+//                thơm ngon với bánh mì mềm mại, ')," + "(2, ' Pizza Pepperoni', 250000, 'Chiếc
+//                pizza nổi tiếng với lớp phô mai béo ngậy, ')," + "(3, ' Bánh Mì Gà Cajun', 350000,
+//                n'Gà nướng với gia vị Cajun đặc trưng, ăn kèm với bánh mì giòn tan')," +
 //                "(4, ' Salad Cesar Hải Sản', 550000, 'Một sự kết hợp hoàn hảo giữa rau xanh tươi ngon, tôm, mực và nước sốt ')," +
 //                "(5, 'Gà Rán Hấp Dẫn', 50000, ' Miếng gà tươi ngon, da giòn giòn cùng với lớp vỏ nước mắm')");
-
 
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion != newVersion){
+        if (oldVersion != newVersion) {
             db.execSQL("DROP TABLE IF EXISTS NGUOIDUNG");
             db.execSQL("DROP TABLE IF EXISTS MONAN");
         }

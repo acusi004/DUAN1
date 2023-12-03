@@ -9,20 +9,24 @@ public class donHang {
    private int sdt;
    private String diaChi;
    private String content;
+   private String date;
 
    public donHang() {
    }
 
 
 
-   public donHang(int idDonHang,int trangThai, int sdt, String diaChi, String content,  int tongTien) {
+   public donHang(int idDonHang,int trangThai, int sdt, String diaChi, String content,  int tongTien, String date) {
       this.idDonHang = idDonHang;
       this.trangThai = trangThai;
       this.sdt = sdt;
       this.diaChi = diaChi;
       this.content = content;
       this.tongTien = tongTien;
+      this.date = date;
    }
+
+
 
    public int getTrangThai() {
       return trangThai;
@@ -78,5 +82,13 @@ public class donHang {
 
    public void setTongTien(int tongTien) {
       this.tongTien = tongTien;
+   }
+
+   public String getDate() {
+      return date;
+   }
+
+   public void setDate(String date) {
+      this.date = date;
    }
 }

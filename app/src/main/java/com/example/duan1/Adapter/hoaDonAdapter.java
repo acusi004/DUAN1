@@ -47,7 +47,7 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
 
     @Override
     public void onBindViewHolder(@NonNull hoaDonAdapter.hoaDonViewHolder holder, int position) {
-        holder.tv_sum.setText(String.valueOf(list.get(position).getTongTien()));
+        holder.tv_sum.setText(String.valueOf(list.get(position).getTongTien()+ " VND"));
         holder.tv_content.setText(list.get(position).getContent());
         holder.tv_diaChi.setText(list.get(position).getDiaChi());
         holder.tv_sdt.setText( "0"+String.valueOf(+list.get(position).getSdt()));

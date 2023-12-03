@@ -22,14 +22,20 @@ import com.example.duan1.Adapter.gioHangAdapter;
 
 import com.example.duan1.DAO.hoaDonDAO;
 import com.example.duan1.DAO.gioHangDAO;
+import com.example.duan1.DAO.lichSuDAO;
 import com.example.duan1.DAO.monAnDAO;
 import com.example.duan1.R;
 import com.example.duan1.database.DbHelper;
 import com.example.duan1.model.donHang;
 import com.example.duan1.model.gioHang;
+import com.example.duan1.model.lichSu;
 import com.example.duan1.model.monAn;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class gioHang_Fragment extends Fragment{
@@ -52,6 +58,10 @@ public class gioHang_Fragment extends Fragment{
     gioHang gh;
 
     hoaDonDAO dhDAO;
+
+    lichSu ls;
+
+    lichSuDAO lsDAO;
 
 
 
@@ -128,7 +138,7 @@ public class gioHang_Fragment extends Fragment{
                     Toast.makeText(getContext(), "Số điện thoại phải là một số", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                // them mon an vao don hang
                 dhDAO = new hoaDonDAO(getContext());
                 gh = new gioHang();
                 dh = new donHang();
@@ -138,13 +148,41 @@ public class gioHang_Fragment extends Fragment{
                 dh.setTrangThai(dh.getTrangThai());
                 dh.setTongTien(calculateTotalSum());
 
+
+                // them mon an vao lich su
+                ls = new lichSu();
+                lsDAO = new lichSuDAO(getContext());
+
+
+                // lay date
+                Calendar calendar = Calendar.getInstance();
+                Date date = calendar.getTime();
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+                String formatedDate = dateFormat.format(date);
+                String formatedTime = timeFormat.format(date);
+
+
+                ls.setDate(formatedTime + " " + formatedDate);
+                ls.setContent(Content);
+                ls.setTrangThai(dh.getTrangThai());
+                ls.setSdt(Integer.parseInt(sdt));
+                ls.setTongTien(calculateTotalSum());
+                ls.setDiaChi(diaChi);
+
+
+
+
                 if(!(dhDAO.insertDonHang(dh))){
                     Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-
                 }
+
+
 
             }
 
