@@ -37,7 +37,7 @@ public class nuocUongFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nuoc_uong, container, false);
         tv_seeAll = view.findViewById(R.id.tv_viewAll_nuocUuong);
         rcv_nuocUong = view.findViewById(R.id.rcv_nuocUong);

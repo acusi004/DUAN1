@@ -21,7 +21,7 @@ public class gioHangDAO {
     public boolean addMon(gioHang gh){
         database = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("MAMONAN",gh.getMaMonAn());
+        cv.put("MAMONAN", gh.getMaMonAn());
         cv.put("SUM", gh.getGia());
         cv.put("SOLUONG", gh.getSoLuong());
         long result = database.insert("GIOHANG", null, cv);
@@ -33,20 +33,33 @@ public class gioHangDAO {
 
     }
 
+    public boolean checkFood(int idfood){
+        database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM MONAN WHERE MAMONAN =?", new String[]{String.valueOf(idfood)});
+        if(cursor.getCount()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     public ArrayList<gioHang> getAll(){
         ArrayList<gioHang> list = new ArrayList<>();
         database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT gh.magiohang, ma.mamonan, ma.tenmon, ma.giamon FROM GIOHANG gh, MONAN ma WHERE gh.mamonan = ma.mamonan", null);
+        Cursor cursor = database.rawQuery("SELECT gh.magiohang, ma.mamonan, ma.tenmon,gh.soluong, gh.sum, ma.hinhanh FROM GIOHANG gh, MONAN ma WHERE gh.mamonan = ma.mamonan", null);
         if(cursor.getCount()>0){
             cursor.moveToFirst();
             do{
                 list.add(new gioHang(cursor.getInt(0),
                         cursor.getInt(1),
                         cursor.getString(2),
-                        cursor.getInt(3)));
+                        cursor.getInt(3),
+                        cursor.getInt(4),
+                        cursor.getString(5)));
             }while (cursor.moveToNext());
         }
+
 
         return list;
 
