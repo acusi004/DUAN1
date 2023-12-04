@@ -39,7 +39,6 @@ public class nuocUongFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nuoc_uong, container, false);
-        btn_addNuocUong = view.findViewById(R.id.btn_add_admin_nuocUong);
         tv_seeAll = view.findViewById(R.id.tv_viewAll_nuocUuong);
         rcv_nuocUong = view.findViewById(R.id.rcv_nuocUong);
         getAllNuocUong();

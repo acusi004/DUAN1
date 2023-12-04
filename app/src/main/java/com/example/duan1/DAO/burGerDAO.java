@@ -10,7 +10,7 @@ import com.example.duan1.model.monAn;
 
 import java.util.ArrayList;
 
-public class burGerDAO {
+public class burGerDAO  {
     DbHelper dbHelper;
 
     SQLiteDatabase database;
@@ -20,11 +20,27 @@ public class burGerDAO {
     }
 
 
-
+    public ArrayList<monAn> getALl(){
+        ArrayList<monAn> list = new ArrayList<>();
+        database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM MONAN", null);
+        if(cursor.getCount()>0){
+            cursor.moveToFirst();
+            do{
+                list.add(new monAn(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5)));
+            }while (cursor.moveToNext());
+        }
+        return list;
+    }
     public ArrayList<monAn> getBuger(){
         ArrayList<monAn> list = new ArrayList<>();
         database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM MONAN WHERE tenloai = 'burger' ", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM MONAN WHERE TENLOAI = 'burger' ", null);
         if(cursor.getCount() > 0){
             cursor.moveToFirst();
             do{
@@ -63,6 +79,4 @@ public class burGerDAO {
         int check = database.update("MONAN", cv , "mamonan = ?", new String[]{String.valueOf(ma.getMaMonAn())});
         return check != -1;
     }
-
-
 }

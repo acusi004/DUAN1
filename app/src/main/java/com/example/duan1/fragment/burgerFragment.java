@@ -13,21 +13,25 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan1.Adapter.monAnAdapter;
 import com.example.duan1.DAO.burGerDAO;
+import com.example.duan1.DAO.loaiDao;
 import com.example.duan1.DAO.monAnDAO;
 import com.example.duan1.R;
 import com.example.duan1.database.DbHelper;
 import com.example.duan1.model.monAn;
+import com.example.duan1.model.loaiMon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
@@ -37,99 +41,44 @@ public class burgerFragment extends Fragment {
     RecyclerView rcv_phoBien;
 
 
-    ArrayList<monAn> listMa = new ArrayList<>();
-
-
     monAnAdapter adapterMa;
 
     burGerDAO bgDAO;
-    monAnDAO maDAO;
+    loaiDao loaiDao;
 
     DbHelper dbHelper;
 
-    FloatingActionButton btn_addMonAn;
 
     TextView tv_all;
+    monAn ma = new monAn();
+    ArrayList<monAn> listMa = new ArrayList<>();
+    monAnDAO maDAO;
+    monAnAdapter adapter;
 
 
-
-    monAn ma;
-
-    int maLoai, positionMa;
-    String tenLoai;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_burger, container, false);
         rcv_phoBien = view.findViewById(R.id.rcv_phoBien);
-        btn_addMonAn = view.findViewById(R.id.btn_add_admin_burger);
         tv_all = view.findViewById(R.id.tv_viewAll);
-
+        loaiDao = new loaiDao(getContext());
+        dbHelper = new DbHelper(getContext());
+        bgDAO = new burGerDAO(getContext());
+        adapter = new monAnAdapter(listMa, dbHelper, getContext());
+        ArrayList<loaiMon> listCat = loaiDao.getDSLoaiMon();
         rcvGetBurger();
         tv_all.setOnClickListener(v -> {
             recycleviewphoBien();
         });
-        btn_addMonAn.setOnClickListener(v -> {
-            dialogAddMonAn();
-        });
+
 
 
         return view;
     }
 
-    public void dialogAddMonAn(){
-        Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.item_dialog);
-
-
-        EditText edt_tenMonAn ,edt_gia, edt_moTa;
-        Button btn_add_confirm;
-
-        edt_tenMonAn = dialog.findViewById(R.id.edt_tenMon);
-        edt_moTa = dialog.findViewById(R.id.edt_moTa);
-        edt_gia = dialog.findViewById(R.id.edt_gia);
-        btn_add_confirm = dialog.findViewById(R.id.btn_add_admin_confirm);
-
-
-
-        btn_add_confirm.setOnClickListener(v -> {
-            String ten = edt_tenMonAn.getText().toString();
-            String gia = edt_gia.getText().toString();
-            String moTa  = edt_moTa.getText().toString().trim();
-
-            if(ten.equals("")||gia.equals("")||moTa.equals("")){
-                Toast.makeText(getContext(), "Cần nhập dữ liêu", Toast.LENGTH_SHORT).show();
-            } else {
-               ma = new monAn();
-               ma.setTenMonAn(ten);
-               ma.setGiaMonAn(Integer.parseInt(gia));
-               ma.setMoTaMonAn(moTa);
-               maDAO = new monAnDAO(getContext());
-               boolean check = maDAO.add(ma);
-               if(check){
-                   Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                   listMa.add(ma);
-                   adapterMa.notifyDataSetChanged();
-                   dialog.dismiss();
-               }else{
-                   Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-               }
-            }
-
-
-        });
-
-        dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-    }
-
-
-    private void rcvGetBurger(){
-        bgDAO = new burGerDAO(getContext());
+    public void rcvGetBurger(){
         listMa = bgDAO.getBuger();
 
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext());
@@ -141,7 +90,7 @@ public class burgerFragment extends Fragment {
 
     }
 
-    private  void recycleviewphoBien(){
+    public void recycleviewphoBien(){
         maDAO = new monAnDAO(getContext());
         listMa = maDAO.getALl();
 
@@ -151,7 +100,6 @@ public class burgerFragment extends Fragment {
 
         adapterMa = new monAnAdapter(listMa,dbHelper,getContext());
         rcv_phoBien.setAdapter(adapterMa);
-
     }
 
 
