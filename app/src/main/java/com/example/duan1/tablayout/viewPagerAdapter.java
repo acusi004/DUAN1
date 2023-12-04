@@ -12,7 +12,14 @@ import com.example.duan1.fragment.nuocUongFragment;
 import com.example.duan1.fragment.pizzaFragment;
 import com.example.duan1.fragment.trangChu_Fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class viewPagerAdapter extends FragmentStateAdapter {
+    private final List<Fragment> fragmentList = new ArrayList<>();
+    public void addFragment(Fragment fragment) {
+        fragmentList.add(fragment);
+    }
 
 
     public viewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
@@ -22,20 +29,14 @@ public class viewPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position){
-            case 0: return new burgerFragment();
-
-            case 1: return new pizzaFragment();
-
-            case 2: return new nuocUongFragment();
-
-            default: return new burgerFragment();
-        }
+     return fragmentList.get(position);
 
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return fragmentList.size();
     }
+
+
 }

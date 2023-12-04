@@ -64,10 +64,7 @@ public class dangNhap extends AppCompatActivity {
         }else{
             nguoiDungDAO = new nguoiDungDAO(this);
             if(nguoiDungDAO.checkUserPass(user, pass)){
-
-
                 startActivity(new Intent(dangNhap.this, manHinhChinh.class));
-                finish();
             }else{
                 Toast.makeText(this, "user va mat khau khong dung", Toast.LENGTH_SHORT).show();
             }

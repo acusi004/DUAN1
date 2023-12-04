@@ -32,6 +32,7 @@ public class manHinhChinh extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_man_hinh_chinh);
         bottomNav();
+        replaceFragment(new trangChu_Fragment());
 
     }
 
@@ -66,6 +67,11 @@ public class manHinhChinh extends AppCompatActivity {
         });
 
 
+    }
+    public void replaceFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameLayout, fragment);
+        transaction.commit();
     }
 
 

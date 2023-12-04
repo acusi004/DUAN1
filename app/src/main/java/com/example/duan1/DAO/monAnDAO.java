@@ -34,6 +34,7 @@ public class monAnDAO {
                         cursor.getString(5)));
             }while (cursor.moveToNext());
         }
+        cursor.close();
         return list;
     }
 
@@ -46,6 +47,7 @@ public class monAnDAO {
         cv.put("GIAMON",ma.getGiaMonAn());
         cv.put("MOTA", ma.getMoTaMonAn());
         cv.put("HINHANH", ma.getImg());
+        cv.put("TENLOAI", ma.getTenLoai());
         long check = database.insert("MONAN", null, cv);
         if(check ==-1){
             return false;
@@ -58,6 +60,34 @@ public class monAnDAO {
         database = dbHelper.getWritableDatabase();
         int row = database.delete("MONAN", "mamonan =?", new String[]{String.valueOf(id)});
         return row != -1;
+    }
+    public ArrayList<String> getTenLoaiMonAnList() {
+        ArrayList<String> listTenLoai = new ArrayList<>();
+        database = dbHelper.getReadableDatabase();
+
+        Cursor cursor = database.rawQuery("SELECT TENLOAI FROM MONAN", null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                listTenLoai.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return listTenLoai;
+    }
+    public boolean update(monAn ma) {
+        database = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("TENMON", ma.getTenMonAn());
+        cv.put("GIAMON", ma.getGiaMonAn());
+        cv.put("MOTA", ma.getMoTaMonAn());
+        cv.put("HINHANH", ma.getImg());
+        cv.put("TENLOAI", ma.getTenLoai());
+
+        int row = database.update("MONAN", cv, "mamonan =?", new String[]{String.valueOf(ma.getMaMonAn())});
+        return row > 0;
     }
 
 
