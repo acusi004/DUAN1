@@ -1,7 +1,10 @@
 package com.example.duan1.Adapter;
 
+import static android.view.View.GONE;
+
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -67,12 +70,13 @@ public class gioHangAdapter extends RecyclerView.Adapter<gioHangAdapter.gioHangV
     @Override
     public void onBindViewHolder(@NonNull gioHangAdapter.gioHangViewHolder holder, int position) {
         gioHang gh = list.get(position);
-
         holder.tv_tenMon.setText(list.get(position).getTenMonAn());
         holder.tv_gia.setText(String.valueOf(list.get(position).getGia()+ " VND"));
 
         String img = list.get(position).getImg();
         Picasso.get().load(img).into(holder.iv_img_gh);
+
+
 
         int pricePlus = list.get(position).getGia();
         holder.iv_plus.setOnClickListener(v -> {

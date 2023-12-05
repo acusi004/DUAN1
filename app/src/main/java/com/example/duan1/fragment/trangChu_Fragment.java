@@ -1,6 +1,8 @@
 package com.example.duan1.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -76,6 +78,12 @@ public class trangChu_Fragment extends Fragment {
         setEvenTablayout();
         viewPagerCallback();
 
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("THONGTIN", Context.MODE_PRIVATE);
+        String loaiTk = sharedPreferences.getString("CHUCVU", "");
+        if(!loaiTk.equals("Admin")){
+            floatingActionButton.setVisibility(View.GONE);
+        }
 
         return view;
     }
@@ -180,5 +188,8 @@ public class trangChu_Fragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
+
+
+
 
 }

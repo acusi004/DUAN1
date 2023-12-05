@@ -65,7 +65,6 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         holder.btn_confirm_donHang.setOnClickListener(v -> {
             dhDAO = new hoaDonDAO(context);
 
-
             boolean check = dhDAO.updateTT(list.get(holder.getAdapterPosition()).getTrangThai());
 
             if(check){

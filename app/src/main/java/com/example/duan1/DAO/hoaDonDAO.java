@@ -72,6 +72,12 @@ public class hoaDonDAO {
         }
     }
 
+    public boolean delete(int id){
+        database = dbHelper.getWritableDatabase();
+        int row = database.delete("DONHANG", "madonhang = ?", new String[]{String.valueOf(id)});
+        return row != -1;
+    }
+
 
 
 

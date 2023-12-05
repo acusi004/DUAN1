@@ -2,6 +2,7 @@ package com.example.duan1.Adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -43,6 +44,8 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
     monAnDAO maDAO;
    loaiDao loaiDao;
 
+   SharedPreferences sharedPreferences;
+
 
 
     public monAnAdapter(ArrayList<monAn> list, DbHelper dbHelper, Context context) {
@@ -72,105 +75,102 @@ public class monAnAdapter extends RecyclerView.Adapter<monAnAdapter.monAnViewHol
 
         // chuc nang sua mon an admin
         holder.itemView.setOnClickListener(v -> {
-            Dialog dialog = new Dialog(v.getContext());
-            dialog.setContentView(R.layout.item_dialog);
+            sharedPreferences = context.getSharedPreferences("THONGTIN", Context.MODE_PRIVATE);
+            String loaitk = sharedPreferences.getString("CHUCVU", "");
+            if(!loaitk.equals("Admin")){
+
+            }else{
+                Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.item_dialog);
 
 
-            TextInputEditText edtTenMonAn = dialog.findViewById(R.id.edt_tenMon);
-            TextInputEditText edtGiaMonAn = dialog.findViewById(R.id.edt_gia);
-            TextInputEditText edtMoTaMonAn = dialog.findViewById(R.id.edt_moTa);
-            TextInputEditText edtLinkAnh = dialog.findViewById(R.id.edt_LinkAnh);
-            Spinner spnTenLoaiMon = dialog.findViewById(R.id.spnTenLoaiMon);
-            Button btnAddAdminConfirm = dialog.findViewById(R.id.btn_add_admin_confirm);
+                TextInputEditText edtTenMonAn = dialog.findViewById(R.id.edt_tenMon);
+                TextInputEditText edtGiaMonAn = dialog.findViewById(R.id.edt_gia);
+                TextInputEditText edtMoTaMonAn = dialog.findViewById(R.id.edt_moTa);
+                TextInputEditText edtLinkAnh = dialog.findViewById(R.id.edt_LinkAnh);
+                Spinner spnTenLoaiMon = dialog.findViewById(R.id.spnTenLoaiMon);
+                Button btnAddAdminConfirm = dialog.findViewById(R.id.btn_add_admin_confirm);
 
 
-            ArrayList<loaiMon> listTenLoaiMon = loaiDao.getDSLoaiMon();
-            ArrayAdapter<String> adapter1 = new ArrayAdapter<>(v.getContext(), android.R.layout.simple_spinner_item, loaiDao.name());
-            spnTenLoaiMon.setAdapter(adapter1);
-            spnTenLoaiMon.setSelection(listTenLoaiMon.indexOf(list.get(position).getTenLoai()));
+                ArrayList<loaiMon> listTenLoaiMon = loaiDao.getDSLoaiMon();
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<>(v.getContext(), android.R.layout.simple_spinner_item, loaiDao.name());
+                spnTenLoaiMon.setAdapter(adapter1);
+                spnTenLoaiMon.setSelection(listTenLoaiMon.indexOf(list.get(position).getTenLoai()));
 
-            monAn ma = list.get(position);
-            edtTenMonAn.setText(ma.getTenMonAn());
-            edtGiaMonAn.setText(String.valueOf(ma.getGiaMonAn()));
-            edtMoTaMonAn.setText(ma.getMoTaMonAn());
-            edtLinkAnh.setText(ma.getImg());
-            btnAddAdminConfirm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String tenMonAnMoi = edtTenMonAn.getText().toString();
-                    String giaMonAnMoi = ((edtGiaMonAn.getText().toString()));
-                    String moTaMonAnMoi = edtMoTaMonAn.getText().toString();
-                    String linkAnhMoi = edtLinkAnh.getText().toString();
-                    String tenLoaiMonMoi = spnTenLoaiMon.getSelectedItem().toString();
-                    if (tenLoaiMonMoi.isEmpty() || giaMonAnMoi.isEmpty() || giaMonAnMoi.equals("") || linkAnhMoi.equals("")) {
-                        Toast.makeText(context, "Cần nhập dữ liệu", Toast.LENGTH_SHORT).show();
-                    }else {
-                        monAn ma = list.get(position);
-                        ma.setTenMonAn(tenMonAnMoi);
-                        ma.setGiaMonAn(Integer.parseInt(giaMonAnMoi));
-                        ma.setMoTaMonAn(moTaMonAnMoi);
-                        ma.setImg(linkAnhMoi);
-                        ma.setTenLoai(tenLoaiMonMoi);
-                        boolean check = maDAO.update(ma);
-                        if (check){
-                            Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                            list.set(position, ma);
-                            notifyDataSetChanged();
-                            dialog.dismiss();
+                monAn ma = list.get(position);
+                edtTenMonAn.setText(ma.getTenMonAn());
+                edtGiaMonAn.setText(String.valueOf(ma.getGiaMonAn()));
+                edtMoTaMonAn.setText(ma.getMoTaMonAn());
+                edtLinkAnh.setText(ma.getImg());
+                btnAddAdminConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String tenMonAnMoi = edtTenMonAn.getText().toString();
+                        String giaMonAnMoi = ((edtGiaMonAn.getText().toString()));
+                        String moTaMonAnMoi = edtMoTaMonAn.getText().toString();
+                        String linkAnhMoi = edtLinkAnh.getText().toString();
+                        String tenLoaiMonMoi = spnTenLoaiMon.getSelectedItem().toString();
+                        if (tenLoaiMonMoi.isEmpty() || giaMonAnMoi.isEmpty() || giaMonAnMoi.equals("") || linkAnhMoi.equals("")) {
+                            Toast.makeText(context, "Cần nhập dữ liệu", Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(context, "Sửa không thành công", Toast.LENGTH_SHORT).show();
+                            monAn ma = list.get(position);
+                            ma.setTenMonAn(tenMonAnMoi);
+                            ma.setGiaMonAn(Integer.parseInt(giaMonAnMoi));
+                            ma.setMoTaMonAn(moTaMonAnMoi);
+                            ma.setImg(linkAnhMoi);
+                            ma.setTenLoai(tenLoaiMonMoi);
+                            boolean check = maDAO.update(ma);
+                            if (check){
+                                Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                                list.set(position, ma);
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                            }else {
+                                Toast.makeText(context, "Sửa không thành công", Toast.LENGTH_SHORT).show();
+                            }
                         }
+
+
                     }
+                });
+                Window window = dialog.getWindow();
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-
-                }
-            });
-            Window window = dialog.getWindow();
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-            dialog.show();
+                dialog.show();
+            }
         });
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Dialog dialog = new Dialog(v.getContext());
-                dialog.setContentView(R.layout.dialog_item_delete_gio_hang);
+                sharedPreferences = context.getSharedPreferences("THONGTIN", Context.MODE_PRIVATE);
+                String loaitk = sharedPreferences.getString("CHUCVU", "");
+                if(!loaitk.equals("Admin")){
+                    // false
+                }else{
+                    // true neu la ADmin se thuc hien dc chuc nang xoa
+                    Dialog dialog = new Dialog(v.getContext());
+                    dialog.setContentView(R.layout.dialog_item_delete_gio_hang);
 
+                    Window window = dialog.getWindow();
+                    window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                    window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+                    Button btn_co, btn_khong;
+                    btn_khong = dialog.findViewById(R.id.item_dialog_delete_khong);
+                    btn_co = dialog.findViewById(R.id.item_dialog_delete_co);
 
+                    btn_co.setOnClickListener(v13 -> {
 
-
-
-                Window window = dialog.getWindow();
-                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                Button btn_co, btn_khong;
-                btn_khong = dialog.findViewById(R.id.item_dialog_delete_khong);
-                btn_co = dialog.findViewById(R.id.item_dialog_delete_co);
-
-                btn_co.setOnClickListener(v13 -> {
-                    maDAO = new monAnDAO(v.getContext());
-                    int maMonAn = list.get(holder.getAdapterPosition()).getMaMonAn();
-                    boolean check = maDAO.delete(maMonAn);
-                    if(check){
-                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                        list.clear();
-                        list = maDAO.getALl();
-                        notifyItemRemoved(holder.getAdapterPosition());
+                    });
+                    btn_khong.setOnClickListener(v14 -> {
                         dialog.dismiss();
-                    }else{
-                        Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                btn_khong.setOnClickListener(v14 -> {
-                    dialog.dismiss();
-                });
+                    });
 
 
-                dialog.show();
+                    dialog.show();
+                }
                 return true;
             }
         });
