@@ -29,6 +29,7 @@ public class hoaDonDAO {
         cv.put("DIACHI", dh.getDiaChi());
         cv.put("CONTENT", dh.getContent());
         cv.put("TONGTIEN", dh.getTongTien());
+        cv.put("DATE", dh.getDate());
 
         long result = database.insert("DONHANG", null, cv);
         if(result==-1){

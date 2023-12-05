@@ -138,20 +138,6 @@ public class gioHang_Fragment extends Fragment{
                     Toast.makeText(getContext(), "Số điện thoại phải là một số", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // them mon an vao don hang
-                dhDAO = new hoaDonDAO(getContext());
-                gh = new gioHang();
-                dh = new donHang();
-                dh.setDiaChi(diaChi);
-                dh.setSdt(Integer.parseInt(sdt));
-                dh.setContent(Content);
-                dh.setTrangThai(dh.getTrangThai());
-                dh.setTongTien(calculateTotalSum());
-
-
-                // them mon an vao lich su
-                ls = new lichSu();
-                lsDAO = new lichSuDAO(getContext());
 
 
                 // lay date
@@ -163,6 +149,24 @@ public class gioHang_Fragment extends Fragment{
 
                 String formatedDate = dateFormat.format(date);
                 String formatedTime = timeFormat.format(date);
+
+                // them mon an vao don hang
+                dhDAO = new hoaDonDAO(getContext());
+                gh = new gioHang();
+                dh = new donHang();
+                dh.setDiaChi(diaChi);
+                dh.setSdt(Integer.parseInt(sdt));
+                dh.setContent(Content);
+                dh.setTrangThai(dh.getTrangThai());
+                dh.setTongTien(calculateTotalSum());
+                dh.setDate(formatedTime + " " + formatedDate);
+
+                // them mon an vao lich su
+                ls = new lichSu();
+                lsDAO = new lichSuDAO(getContext());
+
+
+
 
 
                 ls.setDate(formatedTime + " " + formatedDate);
