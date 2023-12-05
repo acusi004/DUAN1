@@ -40,6 +40,7 @@ public class dangKy extends AppCompatActivity {
 
         String user = edt_dky_username.getText().toString();
         String pass = edt_dky_password.getText().toString();
+        String chucVu = "Nguoi dung";
         String Repass = edt_dky_Repassword.getText().toString();
 
         if(user.equals("")||pass.equals("")||Repass.equals("")){
@@ -48,7 +49,7 @@ public class dangKy extends AppCompatActivity {
             if(pass.equals(Repass)){
                 boolean checkuser = nguoiDungDAO.checkuser(user);
                 if(checkuser == false){
-                    boolean insert = nguoiDungDAO.InsertData(user, pass);
+                    boolean insert = nguoiDungDAO.InsertData(user, pass, chucVu);
                     if(insert==true){
                         Toast.makeText(this, "Successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(dangKy.this, dangNhap.class));

@@ -20,12 +20,13 @@ public class nguoiDungDAO {
         sharedPreferences = context.getSharedPreferences("THONGTIN", MODE_PRIVATE);
     }
 
-    public boolean InsertData (String user, String pass){
+    public boolean InsertData (String user, String pass, String chucvu){
         database = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("ten", user);
-        cv.put("password", pass);
-        long result = database.insert("NguoiDung", null, cv);
+        cv.put("TEN", user);
+        cv.put("PASSWORD", pass);
+        cv.put("CHUCVU", chucvu);
+        long result = database.insert("NGUOIDUNG", null, cv);
         if(result == -1){
             return false;
         }else{
@@ -40,7 +41,7 @@ public class nguoiDungDAO {
             // luu  SharedPreferences
             cursor.moveToFirst();
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("TEN", cursor.getString(0));
+            editor.putString("TEN", cursor.getString(1));
             editor.putString("CHUCVU", cursor.getString(4));
             editor.commit();
             return true;
@@ -57,6 +58,23 @@ public class nguoiDungDAO {
         }else{
             return false;
         }
+    }
+
+
+    public boolean updatePassWord(String ten, String oldPass, String newPass){
+        database = dbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM NGUOIDUNG WHERE ten = ? AND password = ?", new String[]{ten, oldPass});
+        if(cursor.getCount()>0){
+            ContentValues cv = new ContentValues();
+            cv.put("PASSWORD", newPass);
+            long check = database.update("NGUOIDUNG",cv, "ten = ?", new String[]{ten});
+            if(check == -1){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        return false;
     }
 
 
