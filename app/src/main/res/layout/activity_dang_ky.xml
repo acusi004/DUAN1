@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Tài khoản"
                 android:textColorHint="#FFF"
+                android:textColor="#FFF"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
